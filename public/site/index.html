@@ -192,7 +192,10 @@ h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 
 .feat:hover { border-color: color-mix(in oklch, var(--primary) 25%, var(--border-soft)); }
 .feat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 .feat-bar { position: absolute; right: 0; top: 0; height: 100%; width: 4px; }
-.feat-ico { display: flex; height: 58px; width: 58px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 18px; color: #fff; box-shadow: 0 10px 22px -10px color-mix(in oklch, var(--primary) 50%, transparent); }
+.feat-ico { position: relative; display: flex; height: 58px; width: 58px; flex-shrink: 0; align-items: center; justify-content: center; overflow: hidden; border-radius: 18px; color: #fff; box-shadow: 0 10px 22px -10px color-mix(in oklch, var(--primary) 50%, transparent); }
+.feat-ico img { width: 100%; height: 100%; display: block; object-fit: cover; transition: opacity .38s ease, transform .38s ease; }
+.feat-ico img.is-changing { opacity: 0; transform: scale(.94); }
+@media (prefers-reduced-motion: reduce) { .feat-ico img { transition: none; } }
 .feat h3 { margin: 0; font-size: 18px; font-weight: 900; color: var(--primary-deep); font-family: var(--font-display); text-shadow: 0 1px 0 oklch(1 0 0 / .45); }
 .feat p { margin: 5px 0 0; font-size: 14px; line-height: 1.7; color: var(--muted-foreground); }
 
@@ -798,22 +801,22 @@ body{
     <h2 class="section-title">لماذا مجموعة العناية باليدين؟<span class="rule"></span></h2>
     <div class="feat">
       <div class="feat-bar" style="background:linear-gradient(#ec4899,#f43f5e)"></div>
-      <div class="feat-ico" style="background:linear-gradient(#ec4899,#f43f5e)">
-        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+      <div class="feat-ico" data-images="images/feature-hydration-1.jpg|images/feature-hydration-2.jpg|images/feature-hydration-3.jpg" data-alts="غسول اليدين المرطب بالجريب فروت|الجريب فروت والألوفيرا للانتعاش والترطيب|رغوة كريمية تنظف اليدين بلطف">
+        <img src="images/feature-hydration-1.jpg" alt="غسول اليدين المرطب بالجريب فروت" width="58" height="58" loading="lazy"/>
       </div>
       <div><h3>ترطيب عميق ورائحة منعشة</h3><p>غسول اليدين بخلاصة الجريب فروت والألوفيرا ينظّف بلطف ويرطّب البشرة، ويترك رائحة طبيعية منعشة تدوم لساعات.</p></div>
     </div>
     <div class="feat">
       <div class="feat-bar" style="background:linear-gradient(#f59e0b,#f43f5e)"></div>
-      <div class="feat-ico" style="background:linear-gradient(#f59e0b,#f43f5e)">
-        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 014 4c0 2-1 3-2 4-1 1-2 2-2 4"/><path d="M12 3a4 4 0 00-4 4c0 2 1 3 2 4 1 1 2 2 2 4"/><path d="M8 19h8"/><path d="M9 22h6"/></svg>
+      <div class="feat-ico" data-images="images/feature-soap-1.jpg|images/feature-soap-2.jpg|images/feature-soap-3.jpg" data-alts="صابونة الماندرين وإكليل الجبل|صابونة النعناع والزيتون الطبيعية|زيوت نباتية طبيعية مع أعشاب عطرية">
+        <img src="images/feature-soap-1.jpg" alt="صابونة الماندرين وإكليل الجبل" width="58" height="58" loading="lazy"/>
       </div>
       <div><h3>صابون طبيعي بزيوت نباتية</h3><p>صابونتان مصنوعتان من زيوت نباتية نقية: الماندرين مع إكليل الجبل والأرز، والنعناع البري مع الزيتون — تنظيف لطيف ورغوة كريمية غنية.</p></div>
     </div>
     <div class="feat">
       <div class="feat-bar" style="background:linear-gradient(#14b8a6,#06b6d4)"></div>
-      <div class="feat-ico" style="background:linear-gradient(#14b8a6,#06b6d4)">
-        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 010 18"/><path d="M12 3a14 14 0 000 18"/></svg>
+      <div class="feat-ico" data-images="images/feature-gentle-1.jpg|images/feature-gentle-2.jpg|images/feature-gentle-3.jpg" data-alts="يدين ناعمتين بعد العناية اليومية|عناية لطيفة مناسبة لكل أفراد العائلة|الألوفيرا والقطن للعناية بالبشرة الحساسة">
+        <img src="images/feature-gentle-1.jpg" alt="يدين ناعمتين بعد العناية اليومية" width="58" height="58" loading="lazy"/>
       </div>
       <div><h3>لطيفة على جميع أنواع البشرة</h3><p>بدون مواد قاسية ولا جفاف بعد الغسل — تركيبة متوازنة تناسب الاستعمال اليومي المتكرر لكل أفراد العائلة، حتى أصحاب البشرة الحساسة.</p></div>
     </div>
@@ -1445,6 +1448,30 @@ document.getElementById("orderForm").onsubmit = async (ev) => {
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", attach);
   else attach();
+})();
+
+// صور متبدلة تلقائياً لبطاقات المميزات
+(function(){
+  if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.feat-ico[data-images]').forEach(function(frame, groupIndex){
+    var img = frame.querySelector('img');
+    if (!img) return;
+    var sources = (frame.getAttribute('data-images') || '').split('|').filter(Boolean);
+    var alts = (frame.getAttribute('data-alts') || '').split('|');
+    if (sources.length < 2) return;
+    sources.forEach(function(src){ var preload = new Image(); preload.src = src; });
+    var current = 0;
+    window.setTimeout(function rotate(){
+      img.classList.add('is-changing');
+      window.setTimeout(function(){
+        current = (current + 1) % sources.length;
+        img.src = sources[current];
+        img.alt = alts[current] || '';
+        img.classList.remove('is-changing');
+      }, 380);
+      window.setTimeout(rotate, 3600);
+    }, 1600 + groupIndex * 900);
+  });
 })();
 
 // Scroll-reveal + footer year
