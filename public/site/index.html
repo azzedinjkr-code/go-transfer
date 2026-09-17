@@ -1,0 +1,1515 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>مكواة سفر مصغرة Rodess — 1,500 دج مع الدفع عند الاستلام</title>
+<style>
+:root {
+  --radius-xs: .55rem;
+  --radius-sm: .85rem;
+  --radius: 1.25rem;
+  --radius-lg: 1.75rem;
+  --radius-xl: 2.25rem;
+
+  --background: oklch(.985 .006 70);
+  --foreground: oklch(.22 .022 50);
+  --foreground-soft: oklch(.34 .025 55);
+  --card: oklch(1 0 0);
+  --cream: oklch(.965 .014 75);
+  --cream-deep: oklch(.94 .022 70);
+
+  --primary: oklch(.5 .118 50);
+  --primary-deep: oklch(.42 .128 48);
+  --primary-foreground: oklch(.99 .005 70);
+
+  --secondary: oklch(.945 .02 72);
+  --secondary-foreground: oklch(.3 .035 50);
+  --muted: oklch(.95 .016 72);
+  --muted-foreground: oklch(.46 .026 55);
+
+  --cta: oklch(.45 .105 175);
+  --cta-deep: oklch(.38 .115 175);
+  --cta-foreground: oklch(.99 .005 175);
+
+  --gold: oklch(.78 .09 82);
+  --destructive: oklch(.52 .19 25);
+
+  --border: oklch(.91 .014 72);
+  --border-soft: color-mix(in oklch, var(--foreground) 7%, transparent);
+  --input: oklch(.91 .014 72);
+
+  /* Multi-layer shadows for depth */
+  --shadow-soft:   0 1px 2px oklch(.25 .02 55 / .05), 0 8px 24px -14px oklch(.25 .04 55 / .14);
+  --shadow-card:   0 1px 2px oklch(.25 .02 55 / .05), 0 4px 10px -4px oklch(.25 .04 55 / .10), 0 14px 32px -16px oklch(.25 .05 55 / .16);
+  --shadow-lift:   0 1px 2px oklch(.25 .02 55 / .06), 0 8px 20px -8px oklch(.25 .05 55 / .18), 0 26px 50px -22px oklch(.25 .06 55 / .22);
+  --shadow-header: 0 1px 2px oklch(.22 .022 50 / .04), 0 6px 20px -14px oklch(.22 .022 50 / .22);
+  --shadow-premium: 0 1px 2px oklch(.35 .05 55 / .06), 0 14px 32px -10px oklch(.35 .06 55 / .22), 0 36px 70px -26px oklch(.35 .07 55 / .28);
+
+  --font-arabic: "Tajawal","Segoe UI",Tahoma,"Noto Naskh Arabic","Noto Sans Arabic",Arial,sans-serif;
+  /* خط العناوين: Cairo Extra Bold (بديل جاهز: "Reem Kufi") */
+  --font-display: "Cairo","Reem Kufi","Tajawal","Segoe UI",Tahoma,Arial,sans-serif;
+  --ease-out: cubic-bezier(.22,.61,.36,1);
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; }
+html { font-family: var(--font-arabic); -webkit-text-size-adjust: 100%; }
+body {
+  background:
+    radial-gradient(60% 50% at 50% 0%, color-mix(in oklch, var(--primary) 7%, transparent), transparent 70%),
+    radial-gradient(circle at 1px 1px, color-mix(in oklch, var(--foreground) 4%, transparent) 1px, transparent 0),
+    var(--background);
+  background-size: 100% 100%, 22px 22px, 100% 100%;
+  background-attachment: fixed;
+  color: var(--foreground);
+  -webkit-tap-highlight-color: transparent;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+button, input, select, textarea { font-family: inherit; }
+button { cursor: pointer; border: 0; background: none; color: inherit; }
+img { max-width: 100%; display: block; }
+a { color: inherit; text-decoration: none; }
+
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slide-up { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+@keyframes spin { to { transform: rotate(360deg); } }
+@keyframes ping { 75%, 100% { transform: scale(2.4); opacity: 0; } }
+@keyframes pulse-soft { 0%,100% { opacity: 1; } 50% { opacity: .55; } }
+.spin { animation: spin .8s linear infinite; }
+.fade { animation: fade-in .4s ease-out both; }
+.slide { animation: slide-up .5s ease-out both; }
+
+/* Reveal on scroll */
+.reveal { opacity: 0; transform: translateY(18px); transition: opacity .7s ease, transform .7s ease; }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-d1 { transition-delay: .08s; }
+.reveal-d2 { transition-delay: .16s; }
+.reveal-d3 { transition-delay: .24s; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal.in { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }}
+
+/* Layout */
+.page { min-height: 100vh; overflow-x: hidden; }
+.wrap { margin: 0 auto; width: 100%; max-width: 48rem; padding: 0 18px; }
+
+/* Announcement bar */
+.anno { background: linear-gradient(90deg, var(--foreground) 0%, oklch(.32 .04 50) 100%); color: oklch(.97 .01 80); font-size: 12.5px; font-weight: 600; letter-spacing: .01em; }
+.anno-row { max-width: 52rem; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 22px; padding: 9px 16px; }
+.anno-item { display: inline-flex; align-items: center; gap: 7px; }
+.anno-item svg { color: var(--gold); flex-shrink: 0; }
+.anno-dot { opacity: .4; }
+@media (max-width: 520px) { .anno-row { gap: 6px 14px; font-size: 11.5px; padding: 8px 12px; } .anno-dot { display: none; }}
+
+/* Header */
+.header { position: relative; overflow: hidden; background: var(--card); box-shadow: var(--shadow-header); border-bottom: 1px solid var(--border-soft); }
+.header::before { content: ""; position: absolute; inset-inline: 0; top: 0; height: 2px; background: linear-gradient(to left, var(--cta), var(--primary) 50%, var(--gold)); }
+.header-row { display: flex; height: 78px; align-items: center; justify-content: space-between; gap: 12px; padding: 0 18px; max-width: 52rem; margin: 0 auto; }
+.brand { display: inline-flex; align-items: center; gap: 10px; flex-shrink: 0; text-decoration: none; }
+.brand-mark { display: grid; height: 44px; width: 44px; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%); color: #fff; box-shadow: 0 8px 18px -8px color-mix(in oklch, var(--primary) 60%, transparent); }
+.brand-mark svg { width: 26px; height: 26px; }
+.brand-name { font-size: 26px; font-weight: 900; letter-spacing: -0.02em; color: var(--foreground); line-height: 1; }
+.badge { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; background: var(--cream-deep); border: 1px solid color-mix(in oklch, var(--primary) 20%, transparent); padding: 7px 14px; font-size: 12.5px; font-weight: 800; color: var(--primary-deep); }
+.badge .dot { position: relative; height: 7px; width: 7px; border-radius: 999px; background: var(--cta); }
+.badge .dot::before { content: ""; position: absolute; inset: 0; border-radius: 999px; background: var(--cta); animation: ping 1.4s cubic-bezier(0,0,.2,1) infinite; }
+
+/* Gallery */
+.gallery { padding-top: 28px; }
+.gallery-main { position: relative; overflow: hidden; border-radius: var(--radius-lg); background: var(--card); box-shadow: var(--shadow-premium); border: 1px solid var(--border-soft); }
+.gallery-main img { width: 100%; aspect-ratio: 3/4; object-fit: cover; animation: fade-in .35s ease-out; }
+.nav-btn { position: absolute; top: 50%; transform: translateY(-50%); display: flex; height: 42px; width: 42px; align-items: center; justify-content: center; border-radius: 999px; background: color-mix(in oklch, var(--foreground) 55%, transparent); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); color: #fff; transition: background .2s, transform .2s; }
+.nav-btn:hover { background: color-mix(in oklch, var(--foreground) 75%, transparent); }
+.nav-btn:active { transform: translateY(-50%) scale(.94); }
+.nav-btn.left { left: 12px; } .nav-btn.right { right: 12px; }
+.zoom-btn { position: absolute; bottom: 12px; left: 12px; display: flex; height: 44px; width: 44px; align-items: center; justify-content: center; border-radius: 999px; background: color-mix(in oklch, #fff 92%, transparent); backdrop-filter: blur(8px); color: var(--foreground); box-shadow: var(--shadow-soft); transition: transform .2s; }
+.zoom-btn:hover { transform: scale(1.06); }
+.tag-iron { position: absolute; top: 14px; right: 14px; border-radius: 999px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%); backdrop-filter: blur(6px); padding: 5px 13px; font-size: 11.5px; font-weight: 800; color: #fff; letter-spacing: .02em; box-shadow: 0 6px 14px -6px color-mix(in oklch, var(--primary) 70%, transparent); }
+.counter { position: absolute; bottom: 12px; right: 12px; border-radius: 999px; background: color-mix(in oklch, var(--foreground) 70%, transparent); backdrop-filter: blur(6px); padding: 4px 11px; font-size: 11.5px; font-weight: 700; color: #fff; }
+.thumbs { margin-top: 12px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+.thumbs button { overflow: hidden; border-radius: var(--radius-sm); outline: 2px solid var(--border-soft); outline-offset: 1px; opacity: .55; padding: 0; box-shadow: var(--shadow-soft); transition: opacity .25s var(--ease-out), outline-color .25s, transform .25s var(--ease-out), box-shadow .25s; }
+.thumbs button:hover { opacity: .92; transform: translateY(-2px); box-shadow: var(--shadow-card); }
+.thumbs button.on { outline-color: var(--primary); opacity: 1; box-shadow: var(--shadow-card); }
+.thumbs img { width: 100%; aspect-ratio: 1; object-fit: cover; }
+
+/* Hero */
+.hero { margin-top: 20px; text-align: center; padding: 0 4px; }
+.eyebrow { display: inline-block; font-size: 11.5px; font-weight: 800; letter-spacing: .18em; text-transform: uppercase; color: var(--primary); margin-bottom: 10px; }
+.pill { display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; background: color-mix(in oklch, var(--gold) 18%, transparent); border: 1px solid color-mix(in oklch, var(--gold) 40%, transparent); padding: 6px 14px; font-size: 12px; font-weight: 800; color: oklch(.45 .1 60); box-shadow: 0 4px 14px -6px color-mix(in oklch, var(--gold) 35%, transparent); letter-spacing: .01em; }
+.pill .pulse-dot { width: 7px; height: 7px; border-radius: 999px; background: var(--gold); animation: pulse-soft 1.6s ease-in-out infinite; }
+h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 8vw, 52px); font-weight: 900; line-height: 1.32; letter-spacing: 0; color: var(--primary-deep); text-shadow: 0 1px 0 oklch(1 0 0 / .5), 0 10px 26px oklch(.32 .06 52 / .16); }
+/* "مكواة سفر" — تدرّج بني غامق فخم + ظل ناعم (drop-shadow لأنه الأنسب لنص متدرّج) */
+.h1-a { display: inline-block; color: var(--primary-deep); text-shadow: 0 2px 2px oklch(.35 .06 52 / .18); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .h1-a {
+    background: linear-gradient(158deg, oklch(.34 .09 48) 4%, var(--primary) 48%, color-mix(in oklch, var(--primary) 78%, var(--gold)) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 2px 1px oklch(1 0 0 / .45)) drop-shadow(0 10px 18px oklch(.32 .06 52 / .26));
+  }
+}
+.h1-b { margin: 0 6px; display: inline-block; font-family: var(--font-display); font-size: .74em; font-weight: 900; line-height: 1.3; padding: 6px 18px 9px; border-radius: 14px; transform: rotate(-2deg); letter-spacing: 0; color: oklch(.97 .015 75); background: linear-gradient(135deg, oklch(.42 .105 46) 0%, oklch(.3 .085 44) 100%); text-shadow: 0 1px 2px oklch(.2 .04 45 / .55), 0 2px 8px oklch(.22 .05 45 / .35); box-shadow: 0 1px 2px oklch(.35 .05 55 / .10), 0 12px 26px -12px color-mix(in oklch, var(--primary) 80%, transparent), inset 0 1px 0 oklch(1 0 0 / .18); }
+.short { margin: 16px auto 0; max-width: 30rem; font-size: 15px; line-height: 1.85; color: var(--foreground-soft); }
+.btn-cta { display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; background: linear-gradient(135deg, var(--cta) 0%, var(--cta-deep) 100%); color: var(--cta-foreground); padding: 17px 30px; font-size: 17px; font-weight: 800; box-shadow: 0 12px 28px -12px color-mix(in oklch, var(--cta) 80%, transparent), 0 0 0 1px color-mix(in oklch, var(--cta) 30%, transparent) inset; margin-top: 24px; width: 100%; max-width: 26rem; transition: transform .15s, box-shadow .2s; }
+.btn-cta:hover { transform: translateY(-1px); box-shadow: 0 16px 34px -12px color-mix(in oklch, var(--cta) 80%, transparent), 0 0 0 1px color-mix(in oklch, var(--cta) 30%, transparent) inset; }
+.btn-cta:active { transform: scale(.985); }
+.btn-cta:disabled { opacity: .7; transform: none; }
+.btn-cta .arr { transition: transform .2s; display: inline-block; }
+.btn-cta:hover .arr { transform: translateX(-3px); }
+
+/* Section titles */
+.section-title { margin: 0; font-size: clamp(23px, 5.2vw, 34px); font-weight: 900; text-align: center; letter-spacing: 0; color: var(--foreground); }
+.section-title { font-family: var(--font-display); font-weight: 900; color: var(--primary-deep);
+  text-shadow: 0 1px 0 oklch(1 0 0 / .45), 0 8px 18px oklch(.32 .06 52 / .14); }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .section-title { background: linear-gradient(158deg, oklch(.34 .09 48) 4%, var(--primary) 55%, color-mix(in oklch, var(--primary) 80%, var(--gold)) 100%); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent; text-shadow: none;
+    filter: drop-shadow(0 1px 0 oklch(1 0 0 / .4)) drop-shadow(0 8px 14px oklch(.32 .06 52 / .2)); }
+  .section-title .rule { -webkit-text-fill-color: initial; filter: none; }
+}
+.section-title .rule { display: block; width: 40px; height: 2px; background: linear-gradient(to left, var(--primary), var(--gold)); margin: 10px auto 0; border-radius: 2px; }
+/* قسم «يقولون عن Rodess» يبقى كما كان تمامًا (خط الزينة 14px) */
+.testimonials .section-title .rule { margin: 14px auto 0; }
+.section-lead { margin: 10px auto 0; max-width: 30rem; text-align: center; font-size: 14.5px; line-height: 1.8; color: var(--muted-foreground); }
+
+/* Trust */
+.trust { margin: 18px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }
+.trust .section-title { margin-bottom: 16px; }
+.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-radius: var(--radius); background: var(--card); padding: 18px; box-shadow: var(--shadow-card); border: 1px solid var(--border-soft); }
+.trust-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border-radius: var(--radius-sm); background: linear-gradient(180deg, var(--cream) 0%, color-mix(in oklch, var(--cream) 60%, transparent) 100%); padding: 18px 10px; text-align: center; transition: transform .2s; }
+.trust-item:hover { transform: translateY(-2px); }
+.icon-circle { display: grid; height: 42px; width: 42px; place-items: center; border-radius: 999px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%); color: #fff; box-shadow: 0 8px 18px -8px color-mix(in oklch, var(--primary) 60%, transparent); }
+.trust-title { font-size: 13px; font-weight: 900; line-height: 1.35; margin: 0; color: var(--primary-deep); font-family: var(--font-display); }
+.trust-desc { margin: 2px 0 0; font-size: 11px; font-weight: 600; color: var(--muted-foreground); line-height: 1.4; }
+
+/* Features */
+.features { margin: 22px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; display: flex; flex-direction: column; gap: 12px; }
+.features .section-title { margin-bottom: 6px; }
+.feat { position: relative; display: flex; align-items: center; gap: 18px; overflow: hidden; border-radius: var(--radius); background: var(--card); padding: 22px; box-shadow: var(--shadow-card); border: 1px solid var(--border-soft); transition: transform .25s var(--ease-out), box-shadow .25s, border-color .25s; }
+.feat:hover { border-color: color-mix(in oklch, var(--primary) 25%, var(--border-soft)); }
+.feat:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
+.feat-bar { position: absolute; right: 0; top: 0; height: 100%; width: 4px; }
+.feat-ico { display: flex; height: 58px; width: 58px; flex-shrink: 0; align-items: center; justify-content: center; border-radius: 18px; color: #fff; box-shadow: 0 10px 22px -10px color-mix(in oklch, var(--primary) 50%, transparent); }
+.feat h3 { margin: 0; font-size: 18px; font-weight: 900; color: var(--primary-deep); font-family: var(--font-display); text-shadow: 0 1px 0 oklch(1 0 0 / .45); }
+.feat p { margin: 5px 0 0; font-size: 14px; line-height: 1.7; color: var(--muted-foreground); }
+
+/* Specs */
+.specs { margin: 24px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }
+.specs .section-title { margin-bottom: 14px; }
+.specs-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+@media (min-width: 720px) { .specs-grid { grid-template-columns: repeat(4, 1fr); gap: 10px; }}
+.spec { display: flex; flex-direction: column; align-items: center; gap: 6px; border-radius: var(--radius); background: var(--card); padding: 22px 10px; text-align: center; border: 1px solid var(--border-soft); box-shadow: var(--shadow-soft); transition: transform .25s var(--ease-out), box-shadow .25s, border-color .25s; position: relative; overflow: hidden; }
+.spec::after { content: ""; position: absolute; inset-inline: 0; bottom: 0; height: 2px; background: linear-gradient(to left, var(--primary), var(--gold)); opacity: 0; transition: opacity .25s; }
+.spec:hover { transform: translateY(-3px); box-shadow: var(--shadow-card); border-color: color-mix(in oklch, var(--primary) 25%, var(--border-soft)); }
+.spec:hover::after { opacity: 1; }
+.spec-ico { display: grid; height: 44px; width: 44px; place-items: center; border-radius: 12px; background: linear-gradient(135deg, var(--cream-deep), color-mix(in oklch, var(--primary) 14%, var(--cream-deep))); color: var(--primary); margin-bottom: 2px; box-shadow: inset 0 0 0 1px color-mix(in oklch, var(--primary) 12%, transparent); }
+.spec-ico svg { width: 20px; height: 20px; }
+.spec-value { font-size: 16px; font-weight: 900; color: var(--foreground); letter-spacing: -.015em; line-height: 1.1; margin-top: 2px;  font-family: var(--font-display); font-weight: 900; color: var(--primary-deep); }
+.spec-label { font-size: 11.5px; font-weight: 600; color: var(--muted-foreground); line-height: 1.45; }
+
+/* Testimonials */
+.testimonials { margin: 24px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }  /* الفراغ فوق «يقولون عن Rodess» — كان 44px */
+.testimonials .section-title { margin-bottom: 8px; }
+.testi:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); }
+
+/* Order form */
+.order { margin: 24px auto 0; width: 100%; max-width: 34rem; padding: 0 18px; }
+.order .section-title { margin-bottom: 16px; }
+.form { display: flex; flex-direction: column; overflow: hidden; border-radius: var(--radius-lg); background: var(--card); box-shadow: var(--shadow-premium); border: 1px solid var(--border-soft); }
+.form-head { background: linear-gradient(180deg, var(--card) 0%, var(--cream) 100%); padding: 28px 24px 24px; text-align: center; border-bottom: 1px solid var(--border-soft); }
+.form-head::after { content: ""; display: block; width: 44px; height: 2px; background: var(--gold); margin: 14px auto 0; border-radius: 2px; }
+.form-head h2 { margin: 0; font-size: 24px; font-weight: 900; letter-spacing: -0.01em; color: var(--foreground);  font-family: var(--font-display); color: var(--primary-deep); text-shadow: 0 1px 0 oklch(1 0 0 / .5); }
+.form-head p { margin: 8px 0 0; font-size: 13.5px; color: var(--muted-foreground); line-height: 1.6; }
+.form-body { display: flex; flex-direction: column; gap: 18px; padding: 26px 24px; }
+.form-group-title { font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--primary); margin: 0; display: flex; align-items: center; gap: 8px; }
+.form-group-title::before { content: ""; width: 18px; height: 1.5px; background: var(--primary); }
+label.block span.lbl { display: block; margin-bottom: 7px; font-size: 13.5px; font-weight: 700; color: var(--foreground-soft); }
+.field { width: 100%; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--card); padding: 15px 17px; font-size: 15px; font-weight: 600; color: var(--foreground); outline: none; transition: border-color .2s, box-shadow .2s, background .2s; }
+.field::placeholder { color: color-mix(in oklch, var(--muted-foreground) 80%, transparent); font-weight: 500; }
+.field:hover { border-color: color-mix(in oklch, var(--primary) 35%, var(--border)); }
+.field:focus { border-color: var(--primary); box-shadow: 0 0 0 4px color-mix(in oklch, var(--primary) 14%, transparent); background: #fff; }
+.field:disabled { background: var(--muted); color: var(--muted-foreground); }
+select.field { appearance: none; -webkit-appearance: none; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%23a08470' stroke-width='2.5'><path d='M6 9l6 6 6-6'/></svg>"); background-repeat: no-repeat; background-position: left 16px center; padding-left: 44px; }
+.err { margin-top: 5px; font-size: 12px; font-weight: 600; color: var(--destructive); }
+.deliv { display: flex; cursor: pointer; align-items: center; justify-content: space-between; border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--background); padding: 15px 16px; transition: border-color .2s, background .2s, box-shadow .2s; }
+.deliv:hover { border-color: color-mix(in oklch, var(--primary) 40%, var(--border)); }
+.deliv.on { border-color: var(--primary); background: color-mix(in oklch, var(--cream) 70%, transparent); box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 10%, transparent); }
+.warn { font-size: 12.5px; font-weight: 600; color: #a16207; background: color-mix(in oklch, var(--gold) 14%, transparent); border: 1px solid color-mix(in oklch, var(--gold) 40%, transparent); border-radius: 12px; padding: 11px 13px; }
+.totals { display: flex; flex-direction: column; gap: 10px; border-radius: var(--radius); background: linear-gradient(180deg, var(--cream) 0%, color-mix(in oklch, var(--cream) 60%, transparent) 100%); padding: 18px; font-size: 14.5px; color: var(--secondary-foreground); border: 1px solid var(--border-soft); }
+.row { display: flex; align-items: center; justify-content: space-between; }
+.row.total { font-size: 17px; font-weight: 900; color: var(--foreground); }
+.row.total b { color: var(--primary); }
+.hr { height: 1px; background: var(--border-soft); }
+.btn-cta-pro { position: relative; display: inline-flex; align-items: center; justify-content: center; gap: 10px; border-radius: 999px; background: linear-gradient(135deg, var(--cta) 0%, var(--cta-deep) 100%); color: var(--cta-foreground); padding: 18px 30px; font-size: 1.05rem; font-weight: 900; box-shadow: 0 12px 30px -10px color-mix(in oklch, var(--cta) 75%, transparent); width: 100%; transition: transform .15s, box-shadow .2s; }
+.btn-cta-pro:hover { transform: translateY(-1px); box-shadow: 0 16px 36px -10px color-mix(in oklch, var(--cta) 75%, transparent); }
+.btn-cta-pro:active { transform: scale(.985); }
+.btn-cta-pro:disabled { opacity: .7; transform: none; }
+.submit-err { border-radius: var(--radius-sm); background: color-mix(in oklch, var(--destructive) 10%, transparent); padding: 12px; text-align: center; font-size: 13.5px; font-weight: 600; color: var(--destructive); }
+
+/* Success */
+.success { margin: 0 auto; width: 100%; max-width: 30rem; padding: 40px 18px 24px; scroll-margin-top: 0; }  /* رسالة النجاح تبدأ من أعلى الشاشة تمامًا */
+.success-card { overflow: hidden; border-radius: var(--radius-lg); background: var(--card); box-shadow: var(--shadow-lift); border: 1px solid var(--border-soft); }
+.success-top { background: linear-gradient(180deg, var(--cream) 0%, color-mix(in oklch, var(--cream) 50%, transparent) 100%); padding: 34px 22px 28px; text-align: center; }
+.ok { margin: 0 auto; display: grid; height: 68px; width: 68px; place-items: center; border-radius: 999px; background: linear-gradient(180deg, #1aa14b 0%, #12813a 100%); box-shadow: 0 10px 24px -10px rgba(18,129,58,.55), 0 0 0 7px #e7f6ec; color: #fff; }  /* أيقونة رسالة النجاح — أخضر */
+.success-top h2 { margin: 16px 0 0; font-size: 24px; font-weight: 900;  font-family: var(--font-display); color: var(--primary-deep); text-shadow: 0 1px 0 oklch(1 0 0 / .5); }
+.success-top p { margin: 8px auto 0; max-width: 26rem; font-size: 14.5px; color: var(--muted-foreground); line-height: 1.7; }
+.success-body { padding: 22px; }
+.detail { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-radius: 12px; background: var(--background); padding: 10px 14px; margin-top: 8px; }
+.detail .l { display: flex; align-items: center; gap: 8px; font-size: 12.5px; font-weight: 600; color: var(--muted-foreground); }
+.detail .v { font-size: 14px; font-weight: 700; }
+.total-bar { margin-top: 14px; display: flex; align-items: center; justify-content: space-between; border-radius: var(--radius); background: linear-gradient(135deg, var(--primary), var(--primary-deep)); padding: 14px 18px; color: var(--primary-foreground); box-shadow: 0 10px 24px -10px color-mix(in oklch, var(--primary) 50%, transparent); }
+.next { margin-top: 16px; border-radius: var(--radius); border: 1px solid var(--border-soft); background: var(--cream); padding: 14px; text-align: center; font-size: 12.5px; font-weight: 600; line-height: 1.7; color: var(--foreground-soft); }
+
+/* FAQ */
+.faq { margin: 6px auto 0; width: 100%; max-width: 48rem; padding: 0 18px 22px; }  /* الفراغ فوق «أسئلة شائعة» — الخيار الأقصى */
+.faq .section-title { margin-bottom: 18px; }
+
+/* أسئلة شائعة — كان بلا تنسيق أصلاً */
+.faq h2 { margin: 0; font-family: var(--font-display); font-size: clamp(23px, 5.2vw, 34px); font-weight: 900;
+  text-align: center; color: var(--primary-deep); text-shadow: 0 1px 0 oklch(1 0 0 / .45), 0 8px 18px oklch(.32 .06 52 / .14); }
+.faq h2::after { content: ""; display: block; width: 40px; height: 2px; border-radius: 2px;
+  background: linear-gradient(to left, var(--primary), var(--gold)); margin: 10px auto 16px; }
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .faq h2 { background: linear-gradient(158deg, oklch(.34 .09 48) 4%, var(--primary) 55%, color-mix(in oklch, var(--primary) 80%, var(--gold)) 100%); -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent; text-shadow: none;
+    filter: drop-shadow(0 1px 0 oklch(1 0 0 / .4)) drop-shadow(0 8px 14px oklch(.32 .06 52 / .2)); }
+  .faq h2::after { -webkit-text-fill-color: initial; filter: none;
+    background: linear-gradient(to left, var(--primary), var(--gold)); }
+}
+.faq-item { overflow: hidden; border-radius: var(--radius); background: var(--card); margin-top: 10px; border: 1px solid var(--border-soft); }
+.faq-item.open { border-color: color-mix(in oklch, var(--primary) 35%, transparent); box-shadow: var(--shadow-card); }
+.faq-btn { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 14px; padding: 17px 20px; text-align: right; font-size: 14.5px; font-weight: 800; color: var(--foreground); transition: color .2s;  font-family: var(--font-display); font-weight: 900; }
+.faq-btn:hover { color: var(--primary-deep); }
+.faq-ico { display: grid; height: 32px; width: 32px; flex-shrink: 0; place-items: center; border-radius: 999px; background: var(--cream); color: var(--primary); transition: background .2s, color .2s; font-weight: 800; font-size: 16px; }
+.faq-item.open .faq-ico { background: var(--primary); color: var(--primary-foreground); }
+.faq-a { max-height: 0; overflow: hidden; padding: 0 20px; font-size: 14.5px; line-height: 1.85; color: var(--muted-foreground); white-space: pre-line; }
+.faq-txt { opacity: 0; transform: translateY(-4px); transition: opacity .2s ease-out, transform .2s ease-out; }
+.faq-item.open .faq-txt { opacity: 1; transform: none; }
+.faq-item.open .faq-a { max-height: 400px; padding: 0 20px 18px; }
+
+/* Lightbox */
+.lightbox { position: fixed; inset: 0; z-index: 50; display: flex; align-items: center; justify-content: center; background: color-mix(in oklch, var(--foreground) 88%, transparent); backdrop-filter: blur(6px); padding: 16px; animation: fade-in .25s ease; }
+.lightbox img { max-height: 85vh; width: auto; max-width: 100%; border-radius: var(--radius); object-fit: contain; box-shadow: 0 30px 60px -20px rgba(0,0,0,.5); }
+.lb-close { position: absolute; top: 16px; left: 16px; display: flex; height: 44px; width: 44px; align-items: center; justify-content: center; border-radius: 999px; background: var(--card); color: var(--foreground); box-shadow: var(--shadow-soft); }
+
+/* WhatsApp FAB */
+.wa-fab { position: fixed; bottom: 88px; left: 18px; z-index: 40; display: grid; place-items: center; width: 54px; height: 54px; border-radius: 999px; background: #25D366; color: #fff; box-shadow: 0 12px 28px -8px rgba(37,211,102,.55), 0 0 0 1px rgba(255,255,255,.2) inset; transition: transform .2s; }
+.wa-fab:hover { transform: scale(1.08); }
+.wa-fab::before { content: none; }  /* أُزيلت الموجات النابضة من زر واتساب */
+@media (min-width: 769px) { .wa-fab { bottom: 24px; left: 24px; }}
+
+/* Sticky mobile CTA */
+.mobile-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 39; display: none; align-items: center; padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); background: color-mix(in oklch, var(--card) 92%, transparent); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top: 1px solid var(--border-soft); box-shadow: 0 -10px 30px -16px oklch(.3 .05 55 / .25); }
+/* شريط «اطلب الآن» الثابت: نمنع أن يغطي آخر عنصر في الصفحة (كان يخفي آخر سؤال) */
+@media (max-width: 768px) {
+  .mobile-cta { display: flex; }
+  body { padding-bottom: calc(68px + env(safe-area-inset-bottom)); }
+}
+
+
+.mobile-cta-btn { flex: 1; max-width: 460px; margin-inline: auto; border-radius: 999px; background: linear-gradient(135deg, var(--cta), var(--cta-deep)); color: var(--cta-foreground); padding: 13px 18px; font-size: 15px; font-weight: 900; box-shadow: 0 8px 20px -8px color-mix(in oklch, var(--cta) 70%, transparent); display: inline-flex; align-items: center; justify-content: center; gap: 8px; }
+
+.hidden { display: none !important; }
+/* ===== شعار ShopDZ ===== */
+.brand-logo { display: block; height: 40px; width: auto; }
+@media (max-width: 420px) { .brand-logo { height: 34px; } }
+
+/* ===== شريط «اطلب الآن»: يختفي أثناء ظهور الاستمارة ===== */
+.mobile-cta { transition: transform .3s var(--ease-out), opacity .3s var(--ease-out), visibility .3s; }
+.mobile-cta.bar-hidden { transform: translateY(120%); opacity: 0; visibility: hidden; pointer-events: none; }
+
+/* ===== بطاقات العروض (الكمية والخصم) ===== */
+.offer { display: flex; cursor: pointer; align-items: center; justify-content: space-between; gap: 12px;
+  border-radius: var(--radius-sm); border: 1.5px solid var(--border); background: var(--background);
+  padding: 14px 15px; margin-top: 9px; transition: border-color .2s, background .2s, box-shadow .2s; }
+.offer:hover { border-color: color-mix(in oklch, var(--primary) 40%, var(--border)); }
+.offer.on { border-color: var(--primary); background: color-mix(in oklch, var(--cream) 70%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklch, var(--primary) 10%, transparent); }
+.offer-main { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.offer-main input { height: 20px; width: 20px; accent-color: var(--primary); flex: 0 0 auto; }
+.offer-txt { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+.offer-name { font-size: 14.5px; font-weight: 800; color: var(--foreground); }
+.offer-note { font-size: 12px; color: var(--muted-foreground); }
+.offer-prices { display: flex; flex-direction: column; align-items: flex-end; gap: 0; flex: 0 0 auto; }
+.offer-now { font-size: 15.5px; font-weight: 900; color: var(--primary-deep); white-space: nowrap; line-height: 1.15; }
+.offer-was { font-size: 11.5px; color: var(--muted-foreground); text-decoration: line-through;
+  white-space: nowrap; line-height: 1.15; margin-bottom: 1px; }
+.offer-badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; margin-top: 1px; }
+.offer-badge { display: inline-block; font-size: 11px; font-weight: 800; border-radius: 999px;
+  padding: 3px 9px; background: #e7f6ec; color: #146b33; border: 1px solid #bfe3cb; white-space: nowrap; }
+.offer-total-row { display: flex; align-items: center; justify-content: space-between; margin-top: 10px;
+  padding-top: 10px; border-top: 1px dashed var(--border-soft); font-size: 13px; color: var(--muted-foreground); }
+.offer-total-row b { color: var(--primary-deep); font-size: 15px; }
+/* «فاتورة» صندوق الإجمالي — محاذاة موحّدة ووضوح كامل */
+.totals .t-lbl { color: var(--muted-foreground); font-weight: 600; }
+.totals .t-lbl em { font-style: normal; font-size: 12px; opacity: .8; }
+.totals .t-val { font-weight: 800; color: var(--foreground); white-space: nowrap; font-variant-numeric: tabular-nums; }
+.totals .t-val.minus { color: #146b33; }
+.totals .t-val.free { color: #146b33; }
+.totals .hr { margin: 2px 0; }
+.totals .t-final { font-size: 16.5px; font-weight: 800; color: var(--foreground); }
+.totals .t-total { font-size: 17.5px; font-weight: 900; color: var(--primary-deep);
+  white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* ===== حماية ضد السبام ===== */
+.nf-extra { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap; border: 0; opacity: 0; pointer-events: none; }
+.ts-box { margin-top: 4px; }
+.ts-box:empty { display: none; }/* تنبيه أزرار واتساب في المعاينات المحجوبة */
+#waToast { position: fixed; inset: 0; z-index: 999; display: grid; place-items: center; padding: 18px; background: oklch(.25 .02 55 / .38); backdrop-filter: blur(3px); -webkit-backdrop-filter: blur(3px); animation: fade-in .18s var(--ease-out); }
+.wa-toast-in { position: relative; width: 100%; max-width: 340px; border-radius: var(--radius); background: var(--card); border: 1px solid var(--border-soft); box-shadow: var(--shadow-premium); padding: 22px 20px 18px; display: flex; flex-direction: column; gap: 9px; text-align: center; animation: slide-up .22s var(--ease-out); }
+.wa-toast-in b { font-size: 15px; font-weight: 900; }
+.wa-toast-in span { font-size: 13px; line-height: 1.7; color: var(--muted-foreground); }
+.wa-num { font-size: 19px !important; font-weight: 900; color: var(--cta) !important; letter-spacing: .3px; }
+.wa-toast-in button { margin-top: 4px; border-radius: 999px; padding: 11px 16px; font-size: 14px; font-weight: 800; background: linear-gradient(135deg, var(--cta), var(--cta-deep)); color: var(--cta-foreground); }
+.wa-close { position: absolute; top: 8px; inset-inline-end: 10px; background: none !important; color: var(--muted-foreground) !important; font-size: 16px !important; padding: 4px 8px !important; }
+
+/* =====================================================================
+   إطار السعر — تصميم احترافي موجّه للتحويل
+   (بنية: شارة عرض + سعر متدرّج + توفير + مزايا سريعة)
+   ===================================================================== */
+.price-box {
+  position: relative;
+  margin: 26px auto 20px;
+  width: 100%; max-width: 25rem;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  padding: 0;
+  background: none; border: 0; box-shadow: none; border-radius: 0; overflow: visible;
+}
+
+/* السطر العلوي: عبارة «عرض خاص» في الوسط بالضبط + ملصق الخصم على اليسار */
+.pb-top {
+  position: relative; width: 100%; min-height: 56px;
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 6px;
+}
+.pb-top .pb-flag { margin: 0 auto; }                     /* متوسط أفقيًا بدقة */
+.pb-top .pb-sticker {                                   /* ثابت على اليسار بلا تأثير على التوسيط */
+  position: absolute; left: 0; top: calc(50% + 20px);
+  transform: translateY(-50%) rotate(-8deg);
+}
+/* شاشات ضيقة: نُصغّر الشارة قليلًا للحفاظ على التوسيط الدقيق */
+@media (max-width: 379px) {
+  .pb-top .pb-flag { font-size: 10.8px; padding: 5px 12px; gap: 5px; }
+}
+@media (max-width: 339px) {
+  /* ضيقة جدًا: نعود لصف واحد حتى لا يتداخل العنصران */
+  .pb-top { min-height: 0; gap: 9px; }
+  .pb-top .pb-sticker { position: static; transform: rotate(-8deg); }
+  .pb-top .pb-flag { margin: 0; }
+}
+
+.pb-flag {
+  display: inline-flex; align-items: center; gap: 7px;
+  border-radius: 999px; padding: 6px 15px;
+  font-family: var(--font-display); font-size: 12px; font-weight: 900; letter-spacing: .2px;
+  color: var(--primary-deep);
+  background: color-mix(in oklch, var(--gold) 15%, transparent);
+  border: 1px solid color-mix(in oklch, var(--gold) 42%, transparent);
+}
+.pb-star { color: var(--primary); font-size: 11px; }
+
+/* ملصق خصم دائري في زاوية الإطار — يلفت النظر فورًا */
+.pb-sticker {
+  position: relative; flex: none;
+  width: 56px; height: 56px; border-radius: 999px;
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0;
+  font-family: var(--font-display); font-weight: 900; line-height: 1;
+  color: oklch(.98 .012 80);
+  box-shadow: 0 10px 20px -9px color-mix(in oklch, var(--primary) 80%, transparent),
+              inset 0 1px 0 oklch(1 0 0 / .3);
+  transform: rotate(-8deg);
+}
+.pb-sticker img { width: 100%; height: 100%; display: block; border-radius: 999px; }
+
+.price-row { display: flex; align-items: baseline; justify-content: center; gap: 9px; direction: ltr; margin-top: 2px; }
+.price {
+  font-family: var(--font-display);
+  font-size: clamp(48px, 12.5vw, 64px); font-weight: 900; line-height: .98;
+  letter-spacing: -.03em; font-feature-settings: "tnum";
+  color: var(--primary-deep);
+  text-shadow: 0 1px 0 oklch(1 0 0 / .55), 0 10px 22px oklch(.32 .06 52 / .18);
+}
+@supports ((-webkit-background-clip: text) or (background-clip: text)) {
+  .price {
+    background: linear-gradient(162deg, oklch(.32 .095 46) 6%, var(--primary) 52%, color-mix(in oklch, var(--primary) 74%, var(--gold)) 100%);
+    -webkit-background-clip: text; background-clip: text;
+    -webkit-text-fill-color: transparent; color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(0 1px 0 oklch(1 0 0 / .5)) drop-shadow(0 8px 14px oklch(.32 .06 52 / .22));
+  }
+}
+.curr {
+  font-family: var(--font-display); font-size: 19px; font-weight: 900;
+  color: var(--primary); padding-bottom: 3px;
+}
+
+.price-meta { display: flex; align-items: center; justify-content: center; gap: 9px; }
+.old {
+  font-size: 14.5px; font-weight: 700; color: var(--muted-foreground);
+  text-decoration: line-through;
+  text-decoration-thickness: 2px;
+  text-decoration-color: color-mix(in oklch, var(--destructive) 65%, transparent);
+}
+.save {
+  border-radius: 999px; padding: 5px 12px;
+  font-family: var(--font-display); font-size: 12.5px; font-weight: 900;
+  color: oklch(.34 .09 172);
+  background: linear-gradient(180deg, color-mix(in oklch, var(--cta) 15%, var(--card)), color-mix(in oklch, var(--cta) 24%, var(--card)));
+  border: 1px solid color-mix(in oklch, var(--cta) 32%, transparent);
+  box-shadow: 0 3px 10px -4px color-mix(in oklch, var(--cta) 55%, transparent);
+}
+
+/* =====================================================================
+   تعليقات بنمط فيسبوك — كل تعليق في إطار أبيض يشبه لقطة مقصوصة
+   ===================================================================== */
+.fb-post {
+  margin-top: 22px; border-radius: 20px; padding: 14px 12px 16px;
+  background: linear-gradient(180deg, color-mix(in oklch, var(--background) 92%, transparent), transparent);
+  border: 1px solid var(--border-soft);
+}
+.fb-post-head { display: flex; align-items: center; gap: 10px; padding: 2px 6px 12px; }
+.fb-av--brand { --av: linear-gradient(135deg, var(--primary), var(--primary-deep)); }
+.fb-post-meta { display: flex; flex-direction: column; gap: 1px; }
+.fb-post-meta b { font-family: var(--font-display); font-size: 14px; font-weight: 900; color: var(--foreground); }
+.fb-post-meta span { font-size: 11.5px; color: var(--muted-foreground); display: inline-flex; align-items: center; gap: 5px; }
+.fb-globe { width: 12px; height: 12px; opacity: .8; }
+.fb-post-more { margin-inline-start: auto; color: var(--muted-foreground); opacity: .7; }
+.fb-dots { width: 16px; height: 16px; }
+
+.fb-list { display: grid; grid-template-columns: 1fr; gap: 14px; }
+@media (min-width: 760px) { .fb-list { grid-template-columns: repeat(2, 1fr); gap: 16px; } }
+
+.fb-av--photo { object-fit: cover; display: block; background: #e4e6eb; }
+/* الإطار: يشبه لقطة شاشة مقصوصة */
+.fb-card {
+  position: relative; background: var(--card); border: 1px solid #e6e2db;
+  border-radius: 16px; padding: 14px 14px 8px; box-shadow: 0 1px 2px oklch(.25 .02 55 / .05), 0 14px 30px -24px oklch(.3 .05 50 / .45);
+  transition: transform .2s var(--ease-out), box-shadow .2s var(--ease-out);
+}
+.fb-card:nth-child(odd) { transform: rotate(-.4deg); }
+.fb-card:nth-child(even) { transform: rotate(.35deg); }
+.fb-card:hover { transform: rotate(0) translateY(-2px); box-shadow: var(--shadow-card); }
+
+.fb-c { display: flex; gap: 9px; }
+.fb-av {
+  flex: none; width: 38px; height: 38px; border-radius: 999px;
+  display: grid; place-items: center; color: #fff;
+  font-family: var(--font-display); font-size: 16px; font-weight: 900;
+  background: var(--av, var(--primary));
+  box-shadow: 0 2px 6px -2px oklch(.3 .05 50 / .35);
+}
+.fb-main { min-width: 0; flex: 1; }
+.fb-name { display: flex; align-items: baseline; gap: 7px; flex-wrap: wrap; padding: 1px 6px 0; }
+.fb-name b { font-size: 13.5px; font-weight: 800; color: #1c1e21; }
+.fb-city { font-size: 11px; color: var(--muted-foreground); }
+
+.fb-bubble {
+  position: relative; margin-top: 4px; padding: 9px 13px 11px;
+  background: #f0f2f5; border-radius: 18px;
+  font-size: 14px; line-height: 1.85; color: #1c1e21;
+}
+.fb-actions {
+  display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+  padding: 7px 8px 4px 6px; font-size: 12.5px; font-weight: 800; color: #65676b;
+}
+.fb-like {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: #fff; border-radius: 999px; padding: 0 7px 0 0;
+  box-shadow: 0 1px 3px oklch(.3 .02 250 / .22);
+  margin-inline-start: -18px; margin-top: -14px; position: relative; z-index: 1;
+}
+.fb-like .fb-thumb { width: 17px; height: 17px; }
+.fb-like b { font-size: 12px; font-weight: 800; color: #65676b; }
+.fb-btn { cursor: default; user-select: none; }
+.fb-when { margin-inline-start: auto; font-size: 11px; font-weight: 700; color: #8a8d91; }
+
+/* على الشاشات الصغيرة جدًا نقلّل التدوير لتفادي أي تراكب */
+@media (max-width: 480px) { .fb-card:nth-child(odd), .fb-card:nth-child(even) { transform: none; } }
+
+/* ===== لوك «الصورة الأولى» (patch31): خشب + بلاطة محفورة + خياطة + شريط بإطار ذهبي ===== */
+:root{
+  --paper: #fdf8f0;
+  --paper-edge: #e5d2b4;
+  --stitch: oklch(.56 .05 58 / .42);
+  --wood: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='168' height='600'><defs><linearGradient id='b' x1='0' y1='0' x2='1' y2='0'><stop offset='0' stop-color='%23f5efe4'/><stop offset='.42' stop-color='%23fbf8f1'/><stop offset='1' stop-color='%23f3ecdf'/></linearGradient><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9 0.014' numOctaves='4' seed='11' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter></defs><rect width='168' height='600' fill='url(%23b)'/><rect width='168' height='600' fill='%238d7351' filter='url(%23n)' opacity='.15'/><g stroke='%23b39a72'><line x1='56' y1='0' x2='56' y2='600' opacity='.12'/><line x1='112' y1='0' x2='112' y2='600' opacity='.16'/></g><line x1='0' y1='0' x2='0' y2='600' stroke='%23a98f68' stroke-width='1.4' opacity='.3'/><line x1='167' y1='0' x2='167' y2='600' stroke='%23a98f68' stroke-width='1.4' opacity='.3'/></svg>");
+}
+body{
+  background:
+    radial-gradient(70% 40% at 50% 0%, color-mix(in oklch, var(--primary) 9%, transparent), transparent 72%),
+    linear-gradient(90deg, color-mix(in oklch, var(--primary) 10%, transparent), transparent 10%, transparent 90%, color-mix(in oklch, var(--primary) 10%, transparent)),
+    var(--wood) center top/168px 600px repeat,
+    #f5efe3;
+  background-attachment: fixed;
+}
+
+/* ② شارة القسم «الأكثر مبيعاً - جديد 2026» */
+.pill{
+  background: linear-gradient(180deg, #fffdf9, #f5ead9);
+  border: 1px solid var(--paper-edge);
+  color: oklch(.45 .085 52);
+  padding: 8px 16px;
+  box-shadow: 0 7px 16px -11px oklch(.4 .06 55 / .55), inset 0 1px 0 #fff;
+}
+
+/* ③ العنوان + البلاطة */
+.h1-a{ filter: drop-shadow(0 1px 0 oklch(1 0 0 / .5)) drop-shadow(0 9px 15px oklch(.32 .06 52 / .2)); }
+.h1-b{
+  color: oklch(.975 .02 78);
+  border: 1px solid color-mix(in oklch, var(--gold) 52%, transparent);
+  background:
+    radial-gradient(38% 58% at 20% 24%, oklch(.45 .095 42 / .85), transparent 70%),
+    radial-gradient(36% 52% at 76% 70%, oklch(.34 .085 40 / .8), transparent 72%),
+    radial-gradient(70% 95% at 50% 118%, oklch(.27 .07 40 / .75), transparent 70%),
+    linear-gradient(160deg, oklch(.45 .1 44) 0%, oklch(.325 .09 42) 100%);
+  text-shadow: 0 1px 1px oklch(.18 .04 45 / .6), 0 3px 9px oklch(.2 .05 45 / .38);
+  box-shadow: 0 16px 28px -14px oklch(.3 .06 50 / .6), inset 0 1px 0 oklch(1 0 0 / .22), inset 0 -1px 0 oklch(.2 .04 40 / .45);
+}
+.h1-b .spk{
+  width: 1.1em; height: 1.1em; vertical-align: -.1em;
+  margin-inline-start: .34em;
+  filter: drop-shadow(0 1px 1px oklch(.2 .05 45 / .55));
+}
+
+/* ④ شريحة «عرض خاص» */
+.pb-flag{
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #fdf9f1, #f4e9d6);
+  border: 1px solid var(--paper-edge);
+  color: oklch(.46 .07 55);
+  padding: 7px 16px;
+  box-shadow: 0 9px 18px -13px oklch(.4 .06 55 / .65), inset 0 1px 0 #fff;
+}
+.pb-flag::after{
+  content: ""; position: absolute; inset: 3px; border-radius: 999px;
+  border: 1px dashed var(--stitch); pointer-events: none;
+}
+.pb-star{ color: oklch(.52 .09 55); font-size: 10px; }
+
+/* ⑤ حلقة الخصم */
+.pb-sticker{
+  width: 54px; height: 54px;
+  box-shadow: 0 18px 28px -15px oklch(.32 .07 45 / .8), 0 5px 12px -7px oklch(.3 .06 45 / .5), inset 0 1px 0 oklch(1 0 0 / .3);
+}
+
+/* ⑥ السعر والتوفير */
+.price{ filter: drop-shadow(0 2px 0 oklch(1 0 0 / .5)) drop-shadow(0 12px 17px oklch(.32 .06 52 / .24)); }
+.old{ color: oklch(.5 .03 55 / .95); text-decoration-color: color-mix(in oklch, var(--primary) 58%, transparent); }
+.save{
+  position: relative; overflow: hidden;
+  background: linear-gradient(180deg, #fbf2ea, #f2e2d8);
+  border: 1px solid #e4cfc0;
+  color: oklch(.4 .06 165);
+  padding: 6px 14px;
+  box-shadow: 0 9px 16px -13px oklch(.35 .05 55 / .7), inset 0 1px 0 #fff;
+}
+.save::after{
+  content: ""; position: absolute; inset: 3px; border-radius: 999px;
+  border: 1px dashed oklch(.6 .05 45 / .38); pointer-events: none;
+}
+.short{ color: oklch(.4 .028 55); line-height: 1.8; }
+
+/* ⑦ الزرّان الأخضران: زر الهبوط داخل الصفحة + الشريط السفلي */
+.btn-cta{
+  background: linear-gradient(180deg, oklch(.43 .085 172), oklch(.325 .08 172));
+  box-shadow: 0 0 0 2px #d9c194, 0 0 0 4px oklch(.8 .075 82 / .38),
+              0 16px 30px -16px oklch(.24 .06 172 / .8), inset 0 1px 0 oklch(1 0 0 / .28);
+}
+/* ⑦ الشريط السفلي */
+.mobile-cta{
+  background: transparent;
+  backdrop-filter: none; -webkit-backdrop-filter: none;
+  border-top: 0; box-shadow: none;
+  padding: 12px 18px calc(16px + env(safe-area-inset-bottom));
+}
+.mobile-cta-btn{
+  border-radius: 999px;
+  padding: 14px 18px;
+  font-size: 15.5px;
+  background: linear-gradient(180deg, oklch(.43 .085 172), oklch(.32 .08 172));
+  box-shadow: 0 0 0 2px #dcc69d, 0 0 0 3.5px oklch(.78 .07 80 / .38),
+              0 18px 32px -16px oklch(.24 .06 172 / .85), inset 0 1px 0 oklch(1 0 0 / .28);
+}
+
+/* ===== patch32: حواف ذهبية لزر «تأكيد الطلب» (مثل زر «اطلب الآن») ===== */
+.btn-cta-pro{
+  background: linear-gradient(180deg, oklch(.43 .085 172), oklch(.325 .08 172));
+  box-shadow: 0 0 0 2px #d9c194, 0 0 0 4px oklch(.8 .075 82 / .38),
+              0 16px 30px -16px oklch(.24 .06 172 / .8), inset 0 1px 0 oklch(1 0 0 / .28);
+}
+.btn-cta-pro:hover{
+  box-shadow: 0 0 0 2px #d9c194, 0 0 0 4px oklch(.8 .075 82 / .42),
+              0 18px 34px -16px oklch(.24 .06 172 / .85), inset 0 1px 0 oklch(1 0 0 / .32);
+}
+.btn-cta-pro:disabled{
+  box-shadow: 0 0 0 2px #d9c194, 0 0 0 4px oklch(.8 .075 82 / .26),
+              0 10px 22px -14px oklch(.24 .06 172 / .55), inset 0 1px 0 oklch(1 0 0 / .22);
+}
+
+/* ===== patch35: شارة «الأكثر مبيعاً - جديد 2026» — لوحة نحاسية (طبق الأصل من الصورة) ===== */
+.golden-badge{
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 11px 34px;
+  border-radius: 8px;
+  border: 1px solid #6d5220;
+  background:
+    repeating-linear-gradient(90deg, oklch(1 0 0 / .055) 0 1px, oklch(.35 .05 80 / .05) 1px 2px),
+    linear-gradient(180deg, oklch(.97 .06 95 / .55) 0%, oklch(.95 .06 95 / .08) 26%, oklch(.32 .06 80 / .14) 74%, oklch(.24 .06 78 / .36) 100%),
+    linear-gradient(90deg, #7c5f2c 0%, #a5843f 12%, #cbab69 32%, #e9d59f 50%, #cbab69 68%, #a5843f 88%, #7c5f2c 100%);
+  box-shadow:
+    inset 0 1px 1px oklch(1 0 0 / .75),
+    inset 0 -2px 3px oklch(.28 .06 78 / .42),
+    0 6px 14px -6px oklch(.3 .06 75 / .55),
+    0 2px 4px -2px oklch(.3 .06 75 / .3);
+}
+.golden-badge .text{
+  color: #6a4a1c;
+  font-weight: 900;
+  font-size: 17px;
+  font-family: 'Cairo', sans-serif;
+  letter-spacing: .01em;
+  text-shadow: 0 1px 1px oklch(1 0 0 / .9), 0 -1px 1px oklch(.24 .06 75 / .5);
+}
+.golden-badge .screw{
+  position: absolute;
+  width: 11px; height: 11px;
+  background: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCAyMCAyMCc+PGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSdzJyBjeD0nMzQlJyBjeT0nMzAlJyByPSc3OCUnPjxzdG9wIG9mZnNldD0nMCcgc3RvcC1jb2xvcj0nI2ZmZjhkZScvPjxzdG9wIG9mZnNldD0nNDIlJyBzdG9wLWNvbG9yPScjZGNiZjdhJy8+PHN0b3Agb2Zmc2V0PScxMDAlJyBzdG9wLWNvbG9yPScjN2Q1YzIyJy8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+PGNpcmNsZSBjeD0nMTAnIGN5PScxMCcgcj0nOS4yJyBmaWxsPSd1cmwoI3MpJyBzdHJva2U9JyM1NzNlMTUnIHN0cm9rZS13aWR0aD0nLjknLz48ZyBzdHJva2U9JyM1NzNlMTUnIHN0cm9rZS13aWR0aD0nMS41JyBzdHJva2UtbGluZWNhcD0ncm91bmQnIG9wYWNpdHk9Jy44Mic+PHBhdGggZD0nTTUuNiAxMGg4LjgnLz48cGF0aCBkPSdNMTAgNS42djguOCcvPjwvZz48cGF0aCBkPSdNNC42IDUuMmE3LjYgNy42IDAgMCAxIDUuNC0yLjYnIHN0cm9rZT0nI2ZmZmRmMicgc3Ryb2tlLXdpZHRoPScxLjEnIGZpbGw9J25vbmUnIG9wYWNpdHk9Jy43NScvPjwvc3ZnPg==") center / contain no-repeat;
+  filter: drop-shadow(0 1px 1px oklch(.25 .06 75 / .55));
+}
+.golden-badge .screw.left{ right: 11px; }
+.golden-badge .screw.right{ left: 11px; }
+
+/* نسخة الصورة (المعتمدة) */
+.golden-badge--img{ padding: 0; border: 0; background: none; box-shadow: none; }
+.golden-badge--img img{ display: block; width: 250px; height: auto; border-radius: 7px;
+  filter: drop-shadow(0 4px 7px oklch(.3 .06 75 / .45)) drop-shadow(0 1px 2px oklch(.3 .06 75 / .3)); }
+
+/* الدفعة 50: عنوان البطل صار صورة العمل الفني (نفس مكان النص القديم) */
+.h1-img { margin: 16px 0 0; line-height: 0; }
+.h1-img img { display: block; width: 100%; max-width: 392px; height: auto; margin: 0 auto; }
+@media (max-width: 380px) { .h1-img img { max-width: 340px; } }
+
+/* الدفعة 51: جزء السعر صار صورة المستخدم (نفس مكان السعر القديم) */
+.price-img { margin: 2px 0 0; line-height: 0; }
+.price-img img { display: block; width: 100%; max-width: 392px; height: auto; margin: 0 auto; }
+</style>
+
+<link rel="stylesheet" href="assets/fonts.css"><link rel="icon" type="image/x-icon" href="favicon.ico"><link rel="icon" type="image/png" sizes="32x32" href="favicon.png"><meta name="description" content="مكواة سفر مصغرة Rodess بسعر 1,500 دج. خفيفة 250 جرام، تسخين سريع 15-80W، جهد عالمي 110-220V. توصيل لكل ولايات الجزائر، الدفع عند الاستلام."><meta property="og:title" content="مكواة سفر مصغرة Rodess — 1,500 دج مع الدفع عند الاستلام"><meta property="og:description" content="مكواة سفر وردية صغيرة، خفيفة وعملية، تسخين سريع. توصيل لكل الولايات."><meta property="og:type" content="product">
+</head>
+<body>
+<div class="anno"><div class="anno-row"><span class="anno-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>الدفع عند الاستلام</span><span class="anno-dot">·</span><span class="anno-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 3h15v13H1z"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>توصيل لـ 58 ولاية</span><span class="anno-dot">·</span><span class="anno-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>منتجات موثوقة</span></div></div>
+<main class="page" dir="rtl">
+  <header class="header">
+    <div class="header-row" dir="ltr">
+      <a class="brand" href="index.html" dir="ltr" aria-label="ShopDZ">
+        <img class="brand-logo" src="assets/logo-shopdz.png" alt="ShopDZ" width="136" height="40"/>
+      </a>
+      <span class="badge" dir="rtl"><span class="dot" aria-hidden="true"></span>جديد · الأكثر مبيعاً</span>
+    </div>
+  </header>
+
+  <section class="wrap">
+    <div class="gallery-main">
+      <img id="mainImg" src="images/iron-main.jpg" alt="مكواة سفر مصغرة Rodess بلون وردي — صورة رئيسية"/>
+      <button type="button" class="nav-btn left" id="prevBtn" aria-label="الصورة السابقة">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button type="button" class="nav-btn right" id="nextBtn" aria-label="الصورة التالية">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+      <button type="button" class="zoom-btn" id="zoomBtn" aria-label="تكبير الصورة">
+        <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/><path d="M11 8v6M8 11h6"/></svg>
+      </button>
+      <span class="tag-iron">جديد 2026</span>
+      <span class="counter" id="counter">1 / 4</span>
+    </div>
+    <div class="thumbs" id="thumbs"></div>
+
+    <div class="hero slide">
+      <div class="golden-badge golden-badge--img"><img src="assets/badge-golden.jpg" alt="الأكثر مبيعاً - جديد 2026" width="250" height="41"/></div>
+      <h1 class="h1-img"><img src="assets/hero-title.webp" alt="مكواة سفر عملية وأنيقة — تصغير حجمها لا يقل عن أدائها" width="1200" height="645"/></h1>
+      <p class="short">مكواة سفر مصغرة بحجم عملي ووزن خفيف (250 جرام فقط)، تسخن خلال ثوانٍ وتكوي بكفاءة عالية. مثالية للملابس اليومية والسفر والطلبة، بتصميم وردي أنيق و3 مستويات للحرارة تناسب جميع الأقمشة.</p>
+      <div class="price-box">
+        <div class="pb-top">
+          <span class="pb-flag"><span class="pb-star" aria-hidden="true">✦</span> عرض خاص لفترة محدودة</span>
+          <span class="pb-sticker" aria-label="خصم 32 بالمائة"><img src="assets/badge-32.png" alt="خصم 32%" width="54" height="54"/></span>
+        </div>
+
+                <div class="price-img">
+          <img src="assets/price-block.webp" alt="1,500 دج — توفير 700 دج بدل 2,200 دج" width="1150" height="761"/>
+        </div>
+<button type="button" class="btn-cta" id="cta1">اطلب الآن</button>
+    </div>
+  </section>
+
+  <div class="trust reveal">
+    <h2 class="section-title">ثقتك أولويتنا<span class="rule"></span></h2>
+    <div class="trust-grid">
+      <div class="trust-item">
+        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="7" width="16" height="8" rx="1"/><path d="M5 7V5a3 3 0 016 0v2"/><path d="M1 11h16"/></svg></span>
+        <div><p class="trust-title">توصيل سريع وآمن</p><p class="trust-desc">لجميع الولايات</p></div>
+      </div>
+      <div class="trust-item">
+        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="14" height="10" rx="2"/><path d="M2 10h14"/></svg></span>
+        <div><p class="trust-title">الدفع عند الاستلام</p><p class="trust-desc">ادفع بعد ما تستلم</p></div>
+      </div>
+      <div class="trust-item">
+        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l7 4v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <div><p class="trust-title">منتجات عالية الجودة</p><p class="trust-desc">موثوقة ومضمونة</p></div>
+      </div>
+    </div>
+  </div>
+
+  <section class="specs reveal">
+    <h2 class="section-title">المواصفات التقنية<span class="rule"></span></h2>
+    <p class="section-lead">كل ما تحتاج معرفته عن المكواة في لمحة واحدة</p>
+    <div class="specs-grid">
+      <div class="spec">
+        <div class="spec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg></div>
+        <div class="spec-value" dir="ltr">110–220V</div>
+        <div class="spec-label">جهد عالمي · <span dir="ltr">50–60Hz</span></div>
+      </div>
+      <div class="spec">
+        <div class="spec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+        <div class="spec-value" dir="ltr">15–80W</div>
+        <div class="spec-label">قوة تسخين قابلة للضبط</div>
+      </div>
+      <div class="spec">
+        <div class="spec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V5a3 3 0 016 0v2"/></svg></div>
+        <div class="spec-value" dir="ltr">250g</div>
+        <div class="spec-label">وزن خفيف للسفر</div>
+      </div>
+      <div class="spec">
+        <div class="spec-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="spec-value" dir="ltr">ABS + Steel</div>
+        <div class="spec-label">مقاوم للحرارة وفولاذ</div>
+      </div>
+    </div>
+  </section>
+
+  
+
+  <section class="features reveal">
+    <h2 class="section-title">لماذا مكواة Rodess؟<span class="rule"></span></h2>
+    <div class="feat">
+      <div class="feat-bar" style="background:linear-gradient(#ec4899,#f43f5e)"></div>
+      <div class="feat-ico" style="background:linear-gradient(#ec4899,#f43f5e)">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7l1-8z"/></svg>
+      </div>
+      <div><h3>تسخين سريع وفعّال</h3><p>قدرة 15–80W تسخن خلال ثوانٍ، مع قرص تحكم بثلاثة مستويات (LOW / MID / HIGH) يناسب الحرير، القطن، الصوف وغيرها.</p></div>
+    </div>
+    <div class="feat">
+      <div class="feat-bar" style="background:linear-gradient(#f59e0b,#f43f5e)"></div>
+      <div class="feat-ico" style="background:linear-gradient(#f59e0b,#f43f5e)">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a4 4 0 014 4c0 2-1 3-2 4-1 1-2 2-2 4"/><path d="M12 3a4 4 0 00-4 4c0 2 1 3 2 4 1 1 2 2 2 4"/><path d="M8 19h8"/><path d="M9 22h6"/></svg>
+      </div>
+      <div><h3>خفيفة ومدمجة للسفر</h3><p>تصل كتلتها إلى 250 جرام فقط بأبعاد 10×6×6.5 سم — تتسع في أي حقيبة يد، مثالية للسفر والطلبة والشقة الصغيرة.</p></div>
+    </div>
+    <div class="feat">
+      <div class="feat-bar" style="background:linear-gradient(#14b8a6,#06b6d4)"></div>
+      <div class="feat-ico" style="background:linear-gradient(#14b8a6,#06b6d4)">
+        <svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 010 18"/><path d="M12 3a14 14 0 000 18"/></svg>
+      </div>
+      <div><h3>جهد عالمي 110V–220V</h3><p>تعمل مباشرة على أي مقبس بدون محوّل، مع قاعدة معدنية ناعمة تنزلق على القماش بدون تجاعيد أو حرق.</p></div>
+    </div>
+  </section>
+
+  
+
+  <section class="order" id="order">
+    <div id="formView">
+      <form class="form" id="orderForm" novalidate>
+        <div class="form-head"><h2>استمارة الطلب</h2><span class="bar"></span></div>
+        <div class="form-body">
+        <label class="block"><span class="lbl">الاسم الكامل</span>
+          <input class="field" id="name" placeholder="أدخل اسمك الكامل" autocomplete="name"/>
+          <p class="err hidden" id="err-name"></p>
+        </label>
+        <label class="block"><span class="lbl">رقم الهاتف</span>
+          <input class="field" id="phone" dir="rtl" inputmode="tel" placeholder="رقم الهاتف" autocomplete="tel" style="text-align:right"/>
+          <p class="err hidden" id="err-phone"></p>
+        </label>
+        <label class="block"><span class="lbl">الولاية</span>
+          <select class="field" id="wilaya"><option value="">اختر الولاية</option><option value="01">01 - أدرار</option><option value="02">02 - الشلف</option><option value="03">03 - الأغواط</option><option value="04">04 - أم البواقي</option><option value="05">05 - باتنة</option><option value="06">06 - بجاية</option><option value="07">07 - بسكرة</option><option value="08">08 - بشار</option><option value="09">09 - البليدة</option><option value="10">10 - البويرة</option><option value="11">11 - تمنراست</option><option value="12">12 - تبسة</option><option value="13">13 - تلمسان</option><option value="14">14 - تيارت</option><option value="15">15 - تيزي وزو</option><option value="16">16 - الجزائر</option><option value="17">17 - الجلفة</option><option value="18">18 - جيجل</option><option value="19">19 - سطيف</option><option value="20">20 - سعيدة</option><option value="21">21 - سكيكدة</option><option value="22">22 - سيدي بلعباس</option><option value="23">23 - عنابة</option><option value="24">24 - قالمة</option><option value="25">25 - قسنطينة</option><option value="26">26 - المدية</option><option value="27">27 - مستغانم</option><option value="28">28 - المسيلة</option><option value="29">29 - معسكر</option><option value="30">30 - ورقلة</option><option value="31">31 - وهران</option><option value="32">32 - البيض</option><option value="33">33 - إليزي</option><option value="34">34 - برج بوعريريج</option><option value="35">35 - بومرداس</option><option value="36">36 - الطارف</option><option value="37">37 - تندوف</option><option value="38">38 - تيسمسيلت</option><option value="39">39 - الوادي</option><option value="40">40 - خنشلة</option><option value="41">41 - سوق أهراس</option><option value="42">42 - تيبازة</option><option value="43">43 - ميلة</option><option value="44">44 - عين الدفلة</option><option value="45">45 - النعامة</option><option value="46">46 - عين تيموشنت</option><option value="47">47 - غرداية</option><option value="48">48 - غليزان</option><option value="49">49 - تيميمون</option><option value="50">50 - برج باجي مختار</option><option value="51">51 - أولاد جلال</option><option value="52">52 - بني عباس</option><option value="53">53 - عين صالح</option><option value="54">54 - عين قزام</option><option value="55">55 - تقرت</option><option value="56">56 - جانت</option><option value="57">57 - المغير</option><option value="58">58 - المنيعة</option><option value="59">59 - أفلو</option><option value="60">60 - بريكة</option><option value="61">61 - القنطرة</option><option value="62">62 - بئر العاتر</option><option value="63">63 - العريشة</option><option value="64">64 - قصر الشلالة</option><option value="65">65 - عين وسارة</option><option value="66">66 - مسعد</option><option value="67">67 - قصر البخاري</option><option value="68">68 - بوسعادة</option><option value="69">69 - الابيض سيدي الشيخ</option></select>
+          <p class="err hidden" id="err-wilaya"></p>
+        </label>
+        <label class="block"><span class="lbl">البلدية</span>
+          <select class="field" id="commune" disabled><option value="">اختر الولاية أولاً</option></select>
+          <p class="err hidden" id="err-commune"></p>
+        </label>
+        <div id="deliveryBox" class="hidden">
+          <span class="lbl" style="display:block;margin-bottom:8px;font-size:14px;font-weight:700">اختر العرض</span>
+          <div id="offerOpts"></div>
+          <span class="lbl" style="display:block;margin:16px 0 8px;font-size:14px;font-weight:700">طريقة التوصيل</span>
+          <p class="warn hidden" id="deskWarn">ℹ️ هذه البلدية لا تحتوي على مكتب Yalidine، التوصيل متوفر فقط إلى المنزل</p>
+          <div id="deliveryOpts"></div>
+          <p class="err hidden" id="err-delivery"></p>
+        </div>
+        <div id="totals" class="totals hidden"></div>
+        <!-- حماية ضد السبام: حقل مخفي (يجب أن يبقى فارغًا) + مكان Turnstile الاختياري -->
+        <div class="nf-extra" aria-hidden="true">
+          <label for="nf_extra">لا تملأ هذا الحقل</label>
+          <input type="text" id="nf_extra" name="nf_extra" tabindex="-1" autocomplete="off" autocapitalize="off" spellcheck="false" data-lpignore="true" data-1p-ignore data-form-type="other" value=""/>
+        </div>
+        <div class="ts-box" id="tsBox"></div>
+        <p class="submit-err hidden" id="submitError"></p>
+        <button type="submit" class="btn-cta-pro" id="submitBtn">
+          <span>تأكيد الطلب</span>
+        </button>
+        </div>
+      </form>
+    </div>
+    <div id="successView" class="success hidden">
+      <div class="success-card fade">
+        <div class="success-top">
+          <span class="ok"><svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 36a16 16 0 100-32 16 16 0 000 32z"/><path d="M12 20l6 6 12-12"/></svg></span>
+          <h2>تم تأكيد طلبك بنجاح 🎉</h2>
+          <p>شكرًا لثقتك بنا. تم تسجيل طلبك بنجاح وسنتواصل معك قريبًا لتأكيد تفاصيل طلبك.</p>
+        </div>
+        <div class="success-body">
+          <h3 style="margin:0;font-size:14px;font-weight:800">تفاصيل الطلب</h3>
+          <div id="successDetails"></div>
+          <div class="total-bar"><span style="font-size:14px;font-weight:700">السعر الإجمالي</span><span id="successTotal" style="font-weight:800"></span></div>
+          <p class="next">الخطوة التالية: سيتصل بك أحد أعضاء فريقنا على رقمك لتأكيد الطلب، ثم نرسله إليك — والدفع عند الاستلام.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials reveal" id="testimonials">
+    <h2 class="section-title">آراء الزبائن<span class="rule"></span></h2>
+    <p class="section-lead">تعليقات وصلتنا من زبائننا بعد استعمال المكواة</p>
+
+    <div class="fb-post">
+      <div class="fb-post-head">
+        <span class="fb-av fb-av--brand" aria-hidden="true">R</span>
+        <div class="fb-post-meta">
+          <b>Rodess Style Trend</b>
+          <span>منشور · منذ ساعتين · <svg class="fb-globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M3 12h18M12 3c2.4 2.6 2.4 15.4 0 18M12 3c-2.4 2.6-2.4 15.4 0 18" fill="none" stroke="currentColor" stroke-width="1.2"/></svg></span>
+        </div>
+        <span class="fb-post-more"><svg class="fb-dots" viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="12" r="1.8" fill="currentColor"/><circle cx="12" cy="12" r="1.8" fill="currentColor"/><circle cx="19" cy="12" r="1.8" fill="currentColor"/></svg></span>
+      </div>
+
+      <div class="fb-list">
+      <article class="fb-card">
+        <div class="fb-c">
+          <span class="fb-av" style="--av:#1877f2" aria-hidden="true">م</span>
+          <div class="fb-main">
+            <div class="fb-name"><b>محمد أمين</b><span class="fb-city">تلمسان</span></div>
+            <div class="fb-bubble">والله غير منتوج نظيف 👌 المكواة صغيرة بصح تخدم كيما الكبيرة. سخّنتها ودرت قميص العرس في دقائق، والقاعدة ما تحرقش القماش. وصلتني في يومين والدفع عند الاستلام. ربي يبارك فيكم 🤲</div>
+            <div class="fb-actions">
+              <span class="fb-like"><svg class="fb-thumb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M16.6 7.2h-2.5l.4-1.9c.1-.5-.3-.9-.8-.9-.3 0-.5.1-.7.3l-2.7 2.9c-.2.2-.3.5-.3.8v5c0 .6.5 1 1 1h4.4c.5 0 .9-.3 1.1-.8l1.2-3.4c.1-.2.1-.3.1-.5v-1.5c0-.6-.5-1-1.1-1zM9.8 13.4V7.8H8v5.6h1.8z"/></svg><b>14</b></span>
+              <span class="fb-btn">أعجبني</span>
+              <span class="fb-btn">رد</span>
+              <span class="fb-btn">مشاركة</span>
+              <span class="fb-when">منذ ساعتين</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="fb-card">
+        <div class="fb-c">
+          <img class="fb-av fb-av--photo" src="images/avatar-1.jpg" alt="" width="38" height="38" loading="lazy"/>
+          <div class="fb-main">
+            <div class="fb-name"><b>أمينة ب.</b><span class="fb-city">وهران</span></div>
+            <div class="fb-bubble">شريتها لبنتي الجامعية 🎒 تدخل في الحقيبة وما تاخذش بلاصة، وسخنت بلخف. بنتي قالتلي راهي تكوّي قمصانها قبل المحاضرات بلا صداع. خدمة زوينة وسعر معقول 🌸</div>
+            <div class="fb-actions">
+              <span class="fb-like"><svg class="fb-thumb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M16.6 7.2h-2.5l.4-1.9c.1-.5-.3-.9-.8-.9-.3 0-.5.1-.7.3l-2.7 2.9c-.2.2-.3.5-.3.8v5c0 .6.5 1 1 1h4.4c.5 0 .9-.3 1.1-.8l1.2-3.4c.1-.2.1-.3.1-.5v-1.5c0-.6-.5-1-1.1-1zM9.8 13.4V7.8H8v5.6h1.8z"/></svg><b>21</b></span>
+              <span class="fb-btn">أعجبني</span>
+              <span class="fb-btn">رد</span>
+              <span class="fb-btn">مشاركة</span>
+              <span class="fb-when">منذ 5 ساعات</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="fb-card">
+        <div class="fb-c">
+          <span class="fb-av" style="--av:#16a34a" aria-hidden="true">س</span>
+          <div class="fb-main">
+            <div class="fb-name"><b>سفيان</b><span class="fb-city">قسنطينة</span></div>
+            <div class="fb-bubble">كنت في رحلة عمل والفندق ما فيهش الحديد 😅 دخلتها في الساك وديتها معايا، كويت القمصان قبل الاجتماع وخرجت نيشي. 250 غرام برك! صراحة سعرها فيها بزاف</div>
+            <div class="fb-actions">
+              <span class="fb-like"><svg class="fb-thumb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M16.6 7.2h-2.5l.4-1.9c.1-.5-.3-.9-.8-.9-.3 0-.5.1-.7.3l-2.7 2.9c-.2.2-.3.5-.3.8v5c0 .6.5 1 1 1h4.4c.5 0 .9-.3 1.1-.8l1.2-3.4c.1-.2.1-.3.1-.5v-1.5c0-.6-.5-1-1.1-1zM9.8 13.4V7.8H8v5.6h1.8z"/></svg><b>9</b></span>
+              <span class="fb-btn">أعجبني</span>
+              <span class="fb-btn">رد</span>
+              <span class="fb-btn">مشاركة</span>
+              <span class="fb-when">منذ يوم</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      <article class="fb-card">
+        <div class="fb-c">
+          <img class="fb-av fb-av--photo" src="images/avatar-2.jpg" alt="" width="38" height="38" loading="lazy"/>
+          <div class="fb-main">
+            <div class="fb-name"><b>نور الهدى</b><span class="fb-city">الجزائر العاصمة</span></div>
+            <div class="fb-bubble">الذوق الوردي زادها زين 🥰 والحرارة ثابتة، ما خسرتش حتى قميصة. طلبت وحدة لأختي وجاتني في وقتها. ننصح بيها كل بنت تحب تلبس نيشي بلا تعب ❤️</div>
+            <div class="fb-actions">
+              <span class="fb-like"><svg class="fb-thumb" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="12" fill="#1877f2"/><path fill="#fff" d="M16.6 7.2h-2.5l.4-1.9c.1-.5-.3-.9-.8-.9-.3 0-.5.1-.7.3l-2.7 2.9c-.2.2-.3.5-.3.8v5c0 .6.5 1 1 1h4.4c.5 0 .9-.3 1.1-.8l1.2-3.4c.1-.2.1-.3.1-.5v-1.5c0-.6-.5-1-1.1-1zM9.8 13.4V7.8H8v5.6h1.8z"/></svg><b>7</b></span>
+              <span class="fb-btn">أعجبني</span>
+              <span class="fb-btn">رد</span>
+              <span class="fb-btn">مشاركة</span>
+              <span class="fb-when">منذ يومين</span>
+            </div>
+          </div>
+        </div>
+      </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="faq" id="faq">
+    <h2>أسئلة شائعة</h2>
+    <div class="faq-item"><button type="button" class="faq-btn">كيف يتم الدفع؟<span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-txt">الدفع يكون عند الاستلام 💰
+لا تدفع أي مبلغ مسبقًا، ادفع فقط عند استلام طلبك.</div></div></div>
+    <div class="faq-item"><button type="button" class="faq-btn">هل التوصيل متوفر في جميع ولايات الجزائر؟<span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-txt">نعم 🇩🇿، نوفر التوصيل إلى جميع 58 ولاية، سواء إلى المكتب أو إلى المنزل، حسب الخيار المتاح في منطقتك.</div></div></div>
+    <div class="faq-item"><button type="button" class="faq-btn">كم يستغرق وصول الطلب؟<span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-txt">⚡ نعمل على توصيل طلبك في أسرع وقت ممكن. بعد تأكيد الطلب، يتم شحنه مباشرة، ويصل عادةً خلال 24 إلى 72 ساعة حسب ولايتك والبلدية.</div></div></div>
+    <div class="faq-item"><button type="button" class="faq-btn">كيف أعرف تكلفة التوصيل؟<span class="faq-ico">+</span></button><div class="faq-a"><div class="faq-txt">بكل سهولة! بعد اختيار الولاية والبلدية وطريقة التوصيل في استمارة الطلب، يتم احتساب السعر الإجمالي تلقائيًا قبل تأكيد الطلب.</div></div></div>
+
+  </section>
+</main>
+
+<div id="lightbox" class="lightbox hidden">
+  <button type="button" class="lb-close" id="lbClose" aria-label="إغلاق">✕</button>
+  <img id="lbImg" alt=""/>
+</div>
+
+<script>
+const IMAGES = [
+  {src:"images/iron-main.jpg",     alt:"مكواة سفر مصغرة Rodess بلون وردي — صورة رئيسية"},
+  {src:"images/iron-views.jpg",    alt:"ست زوايا مختلفة لمكواة Rodess: أمامية، جانبية، خلفية، علوية"},
+  {src:"images/iron-features.jpg", alt:"تفاصيل مكواة Rodess: قرص الحرارة، المقبض، القاعدة المعدنية، الكابل"},
+  {src:"images/iron-context.jpg",  alt:"استعمال المكواة على القماش مع لوحة المواصفات التقنية"}
+];
+const WILAYAS = [{"code": "01", "name": "أدرار", "deskPrice": 600, "homePrice": 1100, "communes": ["أدرار", "أولاد أحمد تيمي", "أولف", "إن زغمير", "اقبلي", "السبع", "بودة", "تامست", "تامنطيط", "تسابيت", "تيت", "تيمقتن", "رقان", "زاوية كنتة", "سالي", "فنوغيل"]}, {"code": "02", "name": "الشلف", "deskPrice": 400, "homePrice": 690, "communes": ["أبو الحسن", "أم الدروع", "أولاد بن عبد القادر", "أولاد عباس", "أولاد فارس", "الأبيض مجاجة", "الحجاج", "الزبوجة", "الشطية", "الشلف", "الصبحة", "الظهرة", "الكريمية", "المرسى", "الهرانفة", "بريرة", "بنايرية", "بني بوعتاب", "بني حواء", "بني راشد", "بوزغاية", "بوقادير", "تاجنة", "تاوقريت", "تلعصة", "تنس", "حرشون", "سنجاس", "سيدي عبد الرحمن", "سيدي عكاشة", "عين مران", "مصدق", "وادي الفضة", "وادي سلي", "وادي قوسين"]}, {"code": "03", "name": "الأغواط", "deskPrice": 500, "homePrice": 900, "communes": ["أفلو", "الأغواط", "البيضاء", "الحاج مشري", "الحويطة", "الخنق", "العسافية", "الغيشة", "بريدة", "بن ناصر بن شهرة", "تاجرونة", "تاجموت", "تاويالة", "حاسي الدلاعة", "حاسي الرمل", "سبقاق", "سيدي بوزيد", "سيدي مخلوف", "عين سيدي علي", "عين ماضي", "قصر الحيران", "قلتة سيدي سعد", "وادي مرة", "وادي مزي"]}, {"code": "04", "name": "أم البواقي", "deskPrice": 400, "homePrice": 850, "communes": ["أم البواقي", "أولاد حملة", "أولاد زواي", "أولاد قاسم", "البلالة", "الجازية", "الحرملية", "الرحية", "الزرق", "الضلعة", "العامرية", "الفجوج بوغرارة سعودي", "بئر الشهداء", "بحير الشرقي", "بريش", "سوق نعمان", "سيقوس", "عين البيضاء", "عين الديس", "عين الزيتون", "عين ببوش", "عين فكرون", "عين كرشة", "عين مليلة", "فكيرينة", "قصر الصباحي", "مسكيانة", "هنشير تومغني", "وادي نيني"]}, {"code": "05", "name": "باتنة", "deskPrice": 400, "homePrice": 850, "communes": ["أريس", "أولاد سلام", "أولاد سي سليمان", "أولاد عمار", "أولاد عوف", "أولاد فاضل", "إشمول", "إمدوكل", "إينوغيسن", "الجزار", "الحاسي", "الرحبات", "الشمرة", "القصبات", "القيقبة", "المعذر", "باتنة", "بريكة", "بني فضالة الحقانية", "بوزينة", "بولهيلات", "بومقر", "بومية", "بيطام", "تازولت", "تاكسلانت", "تالخمت", "تغرغار", "تكوت", "تيغانمين", "تيلاطو", "تيمقاد", "ثنية العابد", "جرمة", "حيدوسة", "رأس العيون", "زانة البيضاء", "سريانة", "سفيان", "سقانة", "شير", "عزيل عبد القادر", "عين التوتة", "عين جاسر", "عين ياقوت", "عيون العصافير", "غسيرة", "فسديس", "فم الطوب", "قصر بلزمة", "كيمل", "لارباع", "لازرو", "لمسان", "مروانة", "معافة", "منعة", "نقاوس", "وادي الشعبة", "وادي الطاقة", "وادي الماء"]}, {"code": "06", "name": "بجاية", "deskPrice": 400, "homePrice": 790, "communes": ["أدكار", "أقبو", "أكفادو", "أمالو", "أميزور", "أوزلاقن", "أوقاس", "أيت إسماعيل", "أيت رزين", "إغيل علي", "اغرم", "الفلاي", "القصر", "بجاية", "برباشة", "بني جليل", "بني كسيلة", "بني معوش", "بني مليكش", "بو جليل", "بوحمزة", "بوخليفة", "تازمالت", "تاسكريوت", "تالة حمزة", "تامريجت", "تامقرة", "تاوريرت إغيل", "توجة", "تيزي نبربر", "تيشي", "تيفرة", "تيمزريت", "تينبدار", "خراطة", "درقينة", "ذراع القايد", "سمعون", "سوق اوفلا", "سوق لإثنين", "سيدي عياد", "سيدي عيش", "شلاطة", "شميني", "صدوق", "طيبان", "فرعون", "فناية الماثن", "كنديرة", "مالبو", "مسيسنة", "وادي غير"]}, {"code": "07", "name": "بسكرة", "deskPrice": 500, "homePrice": 950, "communes": ["أورلال", "أوماش", "الحاجب", "الحوش", "الغروس", "الفيض", "القنطرة", "المزيرعة", "الوطاية", "برانيس", "برج بن عزوز", "بسكرة", "بوشقرون", "جمورة", "خنقة سيدي ناجي", "زريبة الوادي", "سيدي عقبة", "شتمة", "طولقة", "عين الناقة", "عين زعطوط", "فوغالة", "ليشانة", "ليوة", "مخادمة", "مشونش", "مليلي"]}, {"code": "08", "name": "بشار", "deskPrice": 600, "homePrice": 1000, "communes": ["العبادلة", "القنادسة", "المريجة", "بشار", "بني ونيف", "بوكايس", "تاغيت", "تبلبالة", "عرق فراج", "لحمر", "مشرع هواري بومدين", "موغل"]}, {"code": "09", "name": "البليدة", "deskPrice": 400, "homePrice": 600, "communes": ["أولاد يعيش", "الأربعاء", "البليدة", "الشبلي", "الشريعة", "الشفة", "الصومعة", "العفرون", "اولاد سلامة", "بن خليل", "بني تامو", "بني مراد", "بوعرفة", "بوعينان", "بوفاريك", "بوقرة", "جبابرة", "حمام ملوان", "صوحان", "عين الرمانة", "قرواو", "مفتاح", "موزاية", "وادي العلايق", "وادي جر"]}, {"code": "10", "name": "البويرة", "deskPrice": 400, "homePrice": 690, "communes": ["آث منصور", "أعمر", "أغبالو", "أمشدالة", "أهل القصر", "أولاد راشد", "أيت لعزيز", "الأخضرية", "الأسنام", "البويرة", "الحاكمية", "الحجرة الزرقاء", "الخبوزية", "الدشمية", "العجيبة", "المعمورة", "المقراني", "الهاشمية", "بئر غبالو", "برج أوخريص", "بشلول", "بودربالة", "بوكرم", "تاغزوت", "تاقديت", "جباحية", "حنيف", "حيزر", "ديرة", "روراوة", "ريدان", "زبربر", "سحاريج", "سور الغزلان", "سوق الخميس", "شرفة", "عين الترك", "عين الحجر", "عين العلوي", "عين بسام", "قادرية", "قرومة", "مزدور", "معلة", "وادي البردي"]}, {"code": "11", "name": "تمنراست", "deskPrice": 600, "homePrice": 1100, "communes": ["أدلس", "ابلسة", "تاظروك", "تمنراست", "عين امقل"]}, {"code": "12", "name": "تبسة", "deskPrice": 400, "homePrice": 850, "communes": ["أم علي", "الحمامات", "الحويجبات", "الشريعة", "العقلة", "العقلة المالحة", "العوينات", "الكويف", "الماء الابيض", "المريج", "المزرعة", "الونزة", "بئر الذهب", "بئر العاتر", "بئر مقدم", "بجن", "بكارية", "بوخضرة", "بولحاف الدير", "تبسة", "ثليجان", "سطح قنطيس", "صفصاف الوسرى", "عين الزرقاء", "فركان", "قريقر", "مرسط", "نقرين"]}, {"code": "13", "name": "تلمسان", "deskPrice": 400, "homePrice": 600, "communes": ["أولاد رياح", "أولاد ميمون", "البويهي", "الحناية", "الرمشي", "السواحلية", "السواني", "العريشة", "العزايل", "الغزوات", "الفحول", "القور", "باب العسة", "بن سكران", "بني بهدل", "بني بوسعيد", "بني خلاد", "بني سنوس", "بني صميل", "بني مستر", "بني وارسوس", "بوحلو", "تلمسان", "تيانت", "تيرني بني هديل", "جبالة", "حمام بوغرارة", "دار يغمراسن", "زناتة", "سبدو", "سبعة شيوخ", "سوق الثلاثاء", "سيدي الجيلالي", "سيدي العبدلي", "سيدي مجاهد", "شتوان", "صبرة", "عمير", "عين الكبيرة", "عين النحالة", "عين تالوت", "عين غرابة", "عين فتاح", "عين فزة", "عين يوسف", "فلاوسن", "مرسى بن مهيدي", "مسيردة الفواقة", "مغنية", "منصورة", "ندرومة", "هنين", "وادي الخضر"]}, {"code": "14", "name": "تيارت", "deskPrice": 400, "homePrice": 700, "communes": ["الرحوية", "الرشايقة", "السبت", "السبعين", "السوقر", "الفايجة", "الناظورة", "النعيمة", "بوقرة", "تاقدمت", "تخمرت", "توسنينة", "تيارت", "تيدة", "جبيلات الرصفاء", "جيلالي بن عمار", "حمادية", "دحموني", "زمالة  الأمير عبد القادر", "سرغين", "سي عبد الغني", "سيدي بختي", "سيدي حسني", "سيدي عبد الرحمن", "سيدي علي ملال", "شحيمة", "عين الحديد", "عين الذهب", "عين بوشقيف", "عين دزاريت", "عين كرمس", "فرندة", "قرطوفة", "قصر الشلالة", "مادنة", "مدروسة", "مدريسة", "مشرع الصفا", "مغيلة", "ملاكو", "مهدية", "وادي ليلي"]}, {"code": "15", "name": "تيزي وزو", "deskPrice": 400, "homePrice": 690, "communes": ["أبي يوسف", "أزفون", "أسي يوسف", "أغريب", "أقرو", "أقني قغران", "أيت  أومالو", "أيت بــوادو", "أيت بومهدي", "أيت تودرت", "أيت خليلي", "أيت شافع", "أيت عقـواشة", "أيت عيسى ميمون", "أيت محمود", "أيت يحي موسى", "أيت يحيى", "إبودرارن", "إعــكورن", "إفــرحــونان", "إفليـــسن", "إمســوحال", "إيجــار", "إيرجـــن", "إيفيغاء", "إيلـيــلتـن", "إيلولة أومـــالو", "اقبيل", "الأربعــاء ناث إيراثن", "بنــــي زمنزار", "بني دوالة", "بني زيكــي", "بني عيسي", "بني يني", "بوجيمة", "بوزقــن", "بوغني", "بونوح", "تادمايت", "تيرمتين", "تيزي راشد", "تيزي غنيف", "تيزي نثلاثة", "تيزي وزو", "تيقـزيرت", "تيمـيزار", "ذراع الميزان", "ذراع بن خدة", "زكري", "سوق الإثنين", "سيدي نعمان", "صوامـــع", "عزازقة", "عين الحمام", "عين الزاوية", "فريحة", "فريقات", "ماكودة", "مشطراس", "معـــاتقة", "مقــلع", "مكيرة", "ميزرانـــة", "واسيف", "واضية", "واقنون", "يطــافن"]}, {"code": "16", "name": "الجزائر", "deskPrice": 400, "homePrice": 500, "communes": ["ابن عكنون", "الابيار", "الجزائر الوسطى", "الحراش", "الحمامات", "الخرايسية", "الدار البيضاء", "الدرارية", "الدويرة", "الرايس حميدو", "الرحمانية", "الرويبة", "السحاولة", "الشراقة", "العاشور", "القبة", "القصبة", "الكاليتوس", "المحمدية", "المدنية", "المرادية", "المرسى", "المعالمة", "المغارية", "اولاد شبل", "اولاد فايت", "بئر توتة", "بئر خادم", "بئر مراد رايس", "باب الزوار", "باب الوادي", "بابا حسن", "باش جراح", "براقي", "برج البحري", "برج الكيفان", "بني مسوس", "بوروبة", "بوزريعة", "بولوغين بن زيري", "تسالة المرجة", "جسر قسنطينة", "حسين داي", "حيدرة", "دالي ابراهيم", "رغاية", "زرالدة", "سطاوالي", "سويدانية", "سيدي امحمد", "سيدي موسى", "عين بنيان", "عين طاية", "محمد بلوزداد", "هراوة", "وادي السمار", "وادي قريش"]}, {"code": "17", "name": "الجلفة", "deskPrice": 500, "homePrice": 900, "communes": ["أم العظام", "الادريسية", "الجلفة", "الخميس", "الشارف", "القديد", "بن يعقوب", "بنهار", "بويرة الأحداب", "بيرين", "تعظميت", "حاسي العش", "حاسي بحبح", "حاسي فدول", "حد الصحاري", "دار الشيوخ", "دلدول", "دويس", "زعفران", "زكار", "سد الرحال", "سلمانة", "سيدي بايزيد", "سيدي لعجال", "عمورة", "عين الإبل", "عين الشهداء", "عين فقه", "عين معبد", "عين وسارة", "فيض البطمة", "قرنيني", "قطارة", "مجبارة", "مسعد", "مليليحة"]}, {"code": "18", "name": "جيجل", "deskPrice": 400, "homePrice": 790, "communes": ["أراقن سويسي", "أولاد رابح", "أولاد يحيى خدروش", "الامير عبد القادر", "الجمعة بني حبيبي", "السطارة", "الشحنة", "الشقفة", "الطاهير", "العنصر", "العوانة", "القنار نشفي", "الميلية", "برج الطهر", "بودريعة بني  ياجيس", "بوراوي بلهادف", "بوسيف أولاد عسكر", "تاكسنة", "جيجل", "جيملة", "خيري واد عجول", "زيامة منصورية", "سلمى بن زيادة", "سيدي عبد العزيز", "سيدي معروف", "غبالة", "قاوس", "وجانة"]}, {"code": "19", "name": "سطيف", "deskPrice": 400, "homePrice": 750, "communes": ["أوريسيا", "أولاد تبان", "أولاد سي أحمد", "أولاد صابر", "أولاد عدوان", "أيت نوال مزادة", "التلة", "الحامة", "الدهامشة", "الرصفة", "الطاية", "العلمة", "الولجة", "ايت تيزي", "بئر العرش", "بئر حدادة", "بابور", "بازر سكرة", "بلاعة", "بني شبانة", "بني عزيز", "بني فودة", "بني موحلي", "بني ورتيلان", "بني وسين", "بوسلام", "بوطالب", "بوعنداس", "بوقاعة", "بيضاء برج", "تاشودة", "تالة إيفاسن", "تيزي نبشار", "جميلة", "حربيل", "حمام السخنة", "حمام قرقور", "ذراع قبيلة", "سرج الغول", "سطيف", "صالح باي", "عموشة", "عين أرنات", "عين أزال", "عين الحجر", "عين الروى", "عين السبت", "عين الكبيرة", "عين عباسة", "عين لقراج", "عين ولمان", "قجال", "قصر الابطال", "قلال", "قلتة زرقاء", "قنزات", "ماوكلان", "مزلوق", "معاوية", "واد البارد"]}, {"code": "20", "name": "سعيدة", "deskPrice": 400, "homePrice": 790, "communes": ["أولاد إبراهيم", "أولاد خالد", "الحساسنة", "المعمورة", "تيرسين", "دوي ثابت", "سعيدة", "سيدي احمد", "سيدي بوبكر", "سيدي عمر", "عين الحجر", "عين السخونة", "عين السلطان", "مولاي العربي", "هونت", "يوب"]}, {"code": "21", "name": "سكيكدة", "deskPrice": 400, "homePrice": 690, "communes": ["أم الطوب", "أولاد حبابة", "أولاد عطية", "الحدائق", "الحروش", "الزيتونة", "السبت", "الشرايع", "الغدير", "القل", "الكركرة", "المرسى", "الولجة بولبلوط", "بكوش لخضر", "بن عزوز", "بني بشير", "بني زيد", "بني ولبان", "بوشطاطة", "بين الويدان", "تمالوس", "جندل سعدي محمد", "حمادي كرومة", "خناق مايو", "رمضان جمال", "زردازة", "سكيكدة", "سيدي مزغيش", "صالح بو الشعور", "عزابة", "عين بوزيان", "عين زويت", "عين شرشار", "عين قشرة", "فلفلة", "قنواع", "مجاز الدشيش", "وادي الزهور"]}, {"code": "22", "name": "سيدي بلعباس", "deskPrice": 400, "homePrice": 600, "communes": ["الحصيبة", "السهالة الثورة", "الضاية", "العمارنة", "بئر الحمام", "بضرابين المقراني", "بلعربي", "بن باديس", "بن عشيبة شلية", "بوجبهة البرج", "بوخنفيس", "تاودموت", "تسالة", "تغاليمت", "تفسور", "تلاغ", "تلموني", "تنيرة", "حاسي دحو", "حاسي زهانة", "راس الماء", "رجم دموش", "زروالة", "سفيزف", "سيدي ابراهيم", "سيدي بلعباس", "سيدي حمادوش", "سيدي خالد", "سيدي دحو الزاير", "سيدي شعيب", "سيدي علي بن يوب", "سيدي علي بوسيدي", "سيدي لحسن", "سيدي يعقوب", "شيطوان البلايلة", "طابية", "عين أدن", "عين البرد", "عين الثريد", "عين تندمين", "عين قادة", "لمطار", "مرحوم", "مرين", "مزاورو", "مسيد", "مصطفى بن ابراهيم", "مكدرة", "مولاي سليسن", "وادي السبع", "وادي تاوريرة", "وادي سفيون"]}, {"code": "23", "name": "عنابة", "deskPrice": 400, "homePrice": 800, "communes": ["البوني", "التريعات", "الحجار", "الشرفة", "العلمة", "برحال", "سرايدي", "سيدي عمار", "شطايبي", "عنابة", "عين الباردة", "واد العنب"]}, {"code": "24", "name": "قالمة", "deskPrice": 450, "homePrice": 850, "communes": ["الدهوارة", "الركنية", "الفجوج", "برج صباط", "بلخير", "بن جراح", "بني مزلين", "بوحشانة", "بوحمدان", "بوشقوف", "بوعاتي محمود", "بومهرة أحمد", "تاملوكة", "جبالة الخميسي", "حمام النبايل", "حمام دباغ", "رأس العقبة", "سلاوة عنونة", "عين العربي", "عين بن بيضاء", "عين رقادة", "عين صندل", "عين مخلوف", "قالمة", "قلعة بوصبع", "لخزارة", "مجاز الصفاء", "مجاز عمار", "نشماية", "هواري بومدين", "هيليوبوليس", "وادي الزناتي", "وادي الشحم", "وادي فراغة"]}, {"code": "25", "name": "قسنطينة", "deskPrice": 400, "homePrice": 800, "communes": ["أبن باديس الهرية", "أولاد رحمون", "ابن زياد", "الخروب", "بني حميدان", "بوجريو مسعود", "حامة بوزيان", "ديدوش مراد", "زيغود يوسف", "عين السمارة", "عين عبيد", "قسنطينة"]}, {"code": "26", "name": "المدية", "deskPrice": 400, "homePrice": 690, "communes": ["أم الجليل", "أولاد إبراهيم", "أولاد امعرف", "أولاد بوعشرة", "أولاد دايد", "أولاد عنتر", "أولاد هلال", "البرواقية", "الحمدانية", "الحوضان", "الربعية", "الزبيرية", "السانق", "السواقي", "الشهبونية", "العزيزية", "العمارية", "العوينات", "العيساوية", "القلب الكبير", "الكاف الاخضر", "المدية", "بئر بن عابد", "بعطة", "بن شكاو", "بني سليمان", "بوسكن", "بوشراحيل", "بوعيش", "بوعيشون", "بوغار", "بوغزول", "تابلاط", "تفراوت", "تمسقيدة", "تيزي مهدي", "ثلاث دوائر", "جواب", "حناشة", "خمس جوامع", "دراق", "ذراع السمار", "سدراية", "سغوان", "سي المحجوب", "سيدي الربيع", "سيدي دامد", "سيدي زهار", "سيدي زيان", "سيدي نعمان", "شلالة العذاورة", "شنيقل", "عزيز", "عوامري", "عين اقصير", "عين بوسيف", "قصر البخاري", "مجبر", "مزغنة", "مغراوة", "مفاتحة", "ميهوب", "وادي حربيل", "وزرة"]}, {"code": "27", "name": "مستغانم", "deskPrice": 400, "homePrice": 600, "communes": ["أولاد بوغالم", "أولاد مع الله", "الحسيان (بني ياحي", "السوافلية", "الطواهرية", "بن عبد المالك رمضان", "بوقيراط", "تزقايت", "حاسي ماماش", "حجاج", "خضرة", "خير الدين", "ستيدية", "سور", "سيدي بلعطار", "سيدي علي", "سيدي لخضر", "سيرات", "صفصاف", "صيادة", "عشعاشة", "عين بودينار", "عين تادلس", "عين سيدي الشريف", "عين نويسي", "فرناقة", "ماسرة", "مزغران", "مستغانم", "منصورة", "نكمارية", "وادي الخير"]}, {"code": "28", "name": "المسيلة", "deskPrice": 400, "homePrice": 800, "communes": ["أولاد دراج", "أولاد سليمان", "أولاد سيدي ابراهيم", "أولاد عدي لقبالة", "أولاد ماضي", "أولاد منصور", "الحوامد", "السوامع", "المسيلة", "المطارفة", "المعاضيد", "الهامل", "امجدل", "بئر فضة", "برهوم", "بلعايبة", "بن زوه", "بن سرور", "بني يلمان", "بوسعادة", "بوطي السايح", "تارمونت", "تامسة", "جبل مساعد", "حمام الضلعة", "خبانة", "خطوطي سد الجير", "دهاهنة", "زرزور", "سليم", "سيدي امحمد", "سيدي عامر", "سيدي عيسى", "سيدي هجرس", "شلال", "عين الحجل", "عين الخضراء", "عين الريش", "عين الملح", "عين فارس", "محمد بوضياف", "مسيف", "معاريف", "مقرة", "مناعة", "ولتام", "ونوغة"]}, {"code": "29", "name": "معسكر", "deskPrice": 400, "homePrice": 650, "communes": ["البرج", "الحشم", "السهايلية", "الشرفاء", "العلايمية", "الغمري", "القرط", "القطنة", "القعدة", "المأمونية", "المحمدية", "المطمور", "المنور", "بنيان", "بوحنيفية", "بوهني", "تيزي", "تيغنيف", "حسين", "خلوية", "رأس عين عميروش", "زلامطة", "زهانة", "سجرارة", "سيدي بوسعيد", "سيدي عبد الجبار", "سيدي عبد المومن", "سيدي قادة", "سيق", "عقاز", "عوف", "عين أفرص", "عين فارس", "عين فراح", "عين فكان", "غروس", "غريس", "فراقيق", "فروحة", "قرجوم", "ماقضة", "ماوسة", "معسكر", "مقطع الدوز", "نسمط", "وادي الأبطال", "وادي التاغية"]}, {"code": "30", "name": "ورقلة", "deskPrice": 500, "homePrice": 900, "communes": ["البرمة", "الرويسات", "انقوسة", "حاسي بن عبد الله", "حاسي مسعود", "سيدي خويلد", "عين البيضاء", "ورقلة"]}, {"code": "31", "name": "وهران", "deskPrice": 250, "homePrice": 450, "communes": ["أرزيو", "البراية", "السانية", "العنصر", "الكرمة", "المرسى الكبير", "بئر الجير", "بطيوة", "بن فريحة", "بوتليليس", "بوسفر", "بوفاتيس", "حاسي بن عقبة", "حاسي بونيف", "حاسي مفسوخ", "سيدي الشحمي", "سيدي بن يبقى", "طفراوي", "عين البية", "عين الترك", "عين الكرمة", "قديل", "مرسى الحجاج", "مسرغين", "وادي تليلات", "وهران"]}, {"code": "32", "name": "البيض", "deskPrice": 500, "homePrice": 900, "communes": ["اربوات", "الأبيض سيدي الشيخ", "البنود", "البيض", "الخيثر", "الشقيق", "الغاسول", "الكاف الأحمر", "المحرة", "بريزينة", "بوسمغون", "بوعلام", "بوقطب", "توسمولين", "رقاصة", "ستيتن", "سيدي سليمان", "سيدي طيفور", "سيدي عامر", "شلالة", "عين العراك", "كراكدة"]}, {"code": "33", "name": "إليزي", "deskPrice": 600, "homePrice": 1300, "communes": ["إن أمناس", "إيليزي", "برج عمر إدريس", "دبداب"]}, {"code": "34", "name": "برج بوعريريج", "deskPrice": 400, "homePrice": 790, "communes": ["أولاد أبراهم", "أولاد دحمان", "أولاد سيدي ابراهيم", "الحمادية", "الرابطة", "العش", "العناصر", "القصور", "القلة", "الماين", "المنصورة", "المهير", "الياشير", "بئر قاصد علي", "برج الغدير", "برج بوعريرج", "برج زمورة", "بليمور", "بن داود", "تسامرت", "تفرق", "تقلعيت", "تيكستار", "ثنية النصر", "جعافرة", "حرازة", "حسناوة", "خليل", "رأس الوادي", "سيدي أمبارك", "عين تاغروت", "عين تسرة", "غيلاسة", "مجانة"]}, {"code": "35", "name": "بومرداس", "deskPrice": 350, "homePrice": 690, "communes": ["أعفير", "أولاد عيسى", "أولاد موسى", "أولاد هداج", "الاربعطاش", "الثنية", "الخروبة", "الناصرية", "برج منايل", "بغلية", "بن شود", "بني عمران", "بودواو", "بودواو البحري", "بوزقزة قدارة", "بومرداس", "تاورقة", "تيجلابين", "تيمزريت", "جنات", "حمادي", "خميس الخشنة", "دلس", "زموري", "سوق الحد", "سي مصطفى", "سيدي داود", "شعبة العامر", "عمال", "قورصو", "لقاطة", "يسر"]}, {"code": "36", "name": "الطارف", "deskPrice": 500, "homePrice": 850, "communes": ["البسباس", "الذرعـان", "الزيتونة", "السوارخ", "الشافية", "الشط", "الطارف", "العيون", "القالة", "بحيرة الطيور", "بريحان", "بن مهيدي", "بوثلجة", "بوحجار", "بوقوس", "حمام بني صالح", "رمل السوق", "زريزر", "شبيطة مختار", "شحاني", "عصفور", "عين العسل", "عين الكرمة", "وادي الزيتون"]}, {"code": "37", "name": "تندوف", "deskPrice": 600, "homePrice": 1300, "communes": ["أم العسل", "تندوف"]}, {"code": "38", "name": "تيسمسيلت", "deskPrice": 400, "homePrice": 750, "communes": ["أولاد بسام", "الأربعاء", "الأزهرية", "العيون", "المعاصم", "الملعب", "اليوسفية", "برج الأمير عبد القادر", "برج بونعامة", "بني شعيب", "بني لحسن", "بوقائد", "تملاحت", "تيسمسيلت", "ثنية الاحد", "خميستي", "سيدي العنتري", "سيدي بوتوشنت", "سيدي سليمان", "سيدي عابد", "عماري", "لرجام"]}, {"code": "39", "name": "الوادي", "deskPrice": 550, "homePrice": 950, "communes": ["البياضة", "الحمراية", "الدبيلة", "الرباح", "الرقيبة", "الطالب العربي", "الطريفاوي", "العقلة", "المقرن", "النخلة", "الوادي", "اميه وانسة", "بن  قشة", "تغزوت", "حاسي خليفة", "حساني عبد الكريم", "دوار الماء", "سيدي عون", "قمار", "كوينين", "وادي العلندة", "ورماس"]}, {"code": "40", "name": "خنشلة", "deskPrice": 400, "homePrice": 800, "communes": ["أولاد رشاش", "الحامة", "الرميلة", "المحمل", "الولجة", "انسيغة", "بابار", "بغاي", "بوحمامة", "تاوزيانت", "جلال", "خنشلة", "خيران", "ششار", "شلية", "طامزة", "عين الطويلة", "قايس", "متوسة", "مصارة", "يابوس"]}, {"code": "41", "name": "سوق أهراس", "deskPrice": 500, "homePrice": 800, "communes": ["أم العظايم", "أولاد إدريس", "أولاد مومن", "الحدادة", "الحنانشة", "الخضارة", "الدريعة", "الراقوبة", "الزعرورية", "الزوابي", "المراهنة", "المشروحة", "بئر بوحوش", "تاورة", "ترقالت", "تيفاش", "خميسة", "سافل الويدان", "سدراتة", "سوق أهراس", "سيدي فرج", "عين الزانة", "عين سلطان", "مداوروش", "وادي الكبريت", "ويلان"]}, {"code": "42", "name": "تيبازة", "deskPrice": 350, "homePrice": 690, "communes": ["أحمر العين", "أغبال", "الأرهاط", "الحطاطبة", "الداموس", "الشعيبة", "القليعة", "الناظور", "بني ميلك", "بواسماعيل", "بورقيقة", "بوهارون", "تيبازة", "حجرة النص", "حجوط", "خميستي", "دواودة", "سيدي راشد", "سيدي سميان", "سيدي عامر", "سيدي غيلاس", "شرشال", "عين تاقورايت", "فوكة", "قوراية", "مراد", "مسلمون", "مناصر"]}, {"code": "43", "name": "ميلة", "deskPrice": 400, "homePrice": 690, "communes": ["عين البيضاء أحريش", "أحمد راشدي", "أولاد اخلوف", "اعميرة اراس", "التلاغمة", "الرواشد", "الشيقارة", "العياضي برباس", "القرارم قوقة", "بن يحي عبد الرحمن", "بوحاتم", "تاجنانت", "ترعي باينان", "تسالة لمطاعي", "تسدان حدادة", "تيبرقنت", "حمالة", "دراحي بوصلاح", "زغاية", "سيدي خليفة", "سيدي مروان", "شلغوم العيد", "عين التين", "عين الملوك", "فرجيوة", "مشيرة", "ميلة", "مينار زارزة", "وادي العثمانية", "وادي النجاء", "وادي سقان", "يحي بني قشة"]}, {"code": "44", "name": "عين الدفلة", "deskPrice": 400, "homePrice": 690, "communes": ["الحسانية", "الحسينية", "الروينة", "العامرة", "العبادية", "العطاف", "الماين", "المخاطرية", "بئر ولد خليفة", "بربوش", "برج الأمير خالد", "بطحية", "بلعاص", "بن علال", "بوراشد", "بومدفع", "تاشتة زقاغة", "تبركانين", "جليدة", "جمعة أولاد الشيخ", "جندل", "حمام ريغة", "خميس مليانة", "زدين", "سيدي الأخضر", "طارق بن زياد", "عريب", "عين الاشياخ", "عين البنيان", "عين التركي", "عين الدفلى", "عين السلطان", "عين بويحيى", "مليانة", "واد الجمعة", "وادي الشرفاء"]}, {"code": "45", "name": "النعامة", "deskPrice": 500, "homePrice": 900, "communes": ["البيوض", "القصدير", "المشرية", "النعامة", "تيوت", "جنين بورزق", "سفيسيفة", "عسلة", "عين الصفراء", "عين بن خليل", "مغرار", "مكمن بن عمار"]}, {"code": "46", "name": "عين تيموشنت", "deskPrice": 400, "homePrice": 600, "communes": ["أغلال", "أولاد الكيحل", "أولاد بوجمعة", "الأمير عبد القادر", "الحساسنة", "العامرية", "المالح", "المساعيد", "بني صاف", "بوزجار", "تارقة", "تامزورة", "حاسي الغلة", "حمام بوحجر", "سيدي بن عدة", "سيدي بومدين", "سيدي صافي", "سيدي ورياش", "شعبة اللحم", "شنتوف", "عقب الليل", "عين الأربعاء", "عين الطلبة", "عين الكيحل", "عين تموشنت", "وادي الصباح", "وادي برقش", "ولهاصة الغرابة"]}, {"code": "47", "name": "غرداية", "deskPrice": 500, "homePrice": 990, "communes": ["العطف", "القرارة", "المنصورة", "بريان", "بونورة", "زلفانة", "سبسب", "ضاية بن ضحوة", "غرداية", "متليلي"]}, {"code": "48", "name": "غليزان", "deskPrice": 400, "homePrice": 690, "communes": ["أولاد سيدي الميهوب", "أولاد يعيش", "الحاسي", "الحمادنة", "الرمكة", "القطار", "القلعة", "المطمر", "الولجة", "بلعسل بوزقزة", "بن داود", "بني درقن", "بني زنطيس", "جديوية", "حد الشكالة", "حمري", "دار بن عبد الله", "زمورة", "سوق الحد", "سيدي  خطاب", "سيدي أمحمد بن علي", "سيدي امحمد بن عودة", "سيدي سعادة", "سيدي لزرق", "عمي موسى", "عين الرحمة", "عين طارق", "غليزان", "لحلاف", "مازونة", "مديونة", "مرجة سيدي عابد", "منداس", "وادي الجمعة", "وادي السلام", "وادي رهيو", "واريزان", "يلل"]}, {"code": "49", "name": "تيميمون", "deskPrice": 750, "homePrice": 1000, "communes": ["أوقروت", "أولاد السعيد", "أولاد عيسى", "المطارفة", "تنركوك", "تيميمون", "دلدول", "شروين", "طالمين", "قصر قدور"]}, {"code": "50", "name": "برج باجي مختار", "deskPrice": 1100, "homePrice": 1700, "communes": ["برج باجي مختار", "تيمياوين"]}, {"code": "51", "name": "أولاد جلال", "deskPrice": 600, "homePrice": 900, "communes": ["أولاد جلال", "الدوسن", "الشعيبة", "بسباس", "رأس الميعاد", "سيدي  خالد"]}, {"code": "52", "name": "بني عباس", "deskPrice": 600, "homePrice": 1100, "communes": ["أولاد خضير", "إقلي", "القصابي", "الواتة", "بن يخلف", "بني عباس", "تامترت", "تيمودي", "كرزاز"]}, {"code": "53", "name": "عين صالح", "deskPrice": 600, "homePrice": 1100, "communes": ["إينغر", "عين صالح", "فقارة الزوى"]}, {"code": "54", "name": "عين قزام", "deskPrice": 1100, "homePrice": 1700, "communes": ["تين زواتين", "عين قزام"]}, {"code": "55", "name": "تقرت", "deskPrice": 500, "homePrice": 990, "communes": ["الحجيرة", "الزاوية العابدية", "الطيبات", "العالية", "المقارين", "المنقر", "النزلة", "بلدة اعمر", "بن ناصر", "تبسبست", "تقرت", "تماسين", "سيدي سليمان"]}, {"code": "56", "name": "جانت", "deskPrice": 1100, "homePrice": 1700, "communes": ["برج الحواس", "جانت"]}, {"code": "57", "name": "المغير", "deskPrice": 500, "homePrice": 900, "communes": ["أم الطيور", "المرارة", "المغير", "تندلة", "جامعة", "سطيل", "سيدي خليل", "سيدي عمران"]}, {"code": "58", "name": "المنيعة", "deskPrice": 500, "homePrice": 990, "communes": ["المنيعة", "حاسي الفحل", "حاسي القارة"]}, {"code": "59", "name": "أفلو", "deskPrice": 500, "homePrice": 900, "communes": ["أفلو", "قلتة سيدي سعد", "عين سيدي علي", "البيضاء", "بريدة", "الغيشة", "الحاج مشري", "سبقاق", "تاويالة", "وادي مرة", "وادي مزي", "سيدي بوزيد"]}, {"code": "60", "name": "بريكة", "deskPrice": 400, "homePrice": 850, "communes": ["بريكة", "بيطام", "عزيل عبد القادر", "تيلاطو", "سقانة", "الجزار", "إمدوكل", "أولاد عمار"]}, {"code": "61", "name": "القنطرة", "deskPrice": 500, "homePrice": 950, "communes": ["القنطرة", "عين زعطوط", "برانيس", "الوطاية", "جمورة"]}, {"code": "62", "name": "بئر العاتر", "deskPrice": 400, "homePrice": 850, "communes": ["بئر العاتر", "نقرين", "العقلة المالحة", "فركان"]}, {"code": "63", "name": "العريشة", "deskPrice": 400, "homePrice": 600, "communes": ["العريشة", "القور", "سيدي الجيلالي", "البويهي"]}, {"code": "64", "name": "قصر الشلالة", "deskPrice": 400, "homePrice": 700, "communes": ["قصر الشلالة", "زمالة الأمير عبد القادر", "الرشايقة", "حمادية", "سرغين", "بوقرة"]}, {"code": "65", "name": "عين وسارة", "deskPrice": 500, "homePrice": 900, "communes": ["عين وسارة", "بيرين", "بويرة الأحداب", "الخميس", "سيدي لعجال", "حد الصحاري", "قرنيني", "بنهار", "حاسي فدول", "عين فقه"]}, {"code": "66", "name": "مسعد", "deskPrice": 500, "homePrice": 900, "communes": ["مسعد", "سد الرحال", "فيض البطمة", "قطارة", "سلمانة", "أم العظام", "دلدول", "عمورة"]}, {"code": "67", "name": "قصر البخاري", "deskPrice": 400, "homePrice": 690, "communes": ["قصر البخاري", "أولاد معارف", "عين بوسيف", "دراق", "بوعيش", "الكاف الأخضر", "شلالة العذاورة", "أولاد هلال", "تفراوت", "بوغار", "سيدي دامد", "عزيز", "الشهبونية", "شنيقل", "عين اقصير", "أم الجليل", "مفاتحة", "بوغزول", "العوينات", "أولاد عنتر", "سانق"]}, {"code": "68", "name": "بوسعادة", "deskPrice": 400, "homePrice": 800, "communes": ["بوسعادة", "خبانة", "امسيف", "أولاد سيدي ابراهيم", "سيدي عامر", "تامسة", "بن سرور", "أولاد سليمان", "الحوامد", "الهامل", "زرزور", "محمد بوضياف", "بن زوه", "بئر فضة", "عين فارس", "سيدي امحمد", "مناعة", "عين الملح", "مجبر", "سليم", "عين الريش", "ولتام", "جبل مساعد"]}, {"code": "69", "name": "الابيض سيدي الشيخ", "deskPrice": 500, "homePrice": 900, "communes": ["الأبيض سيدي الشيخ", "عين العراك", "اربوات", "بوسمغون", "الشلالة", "البنود", "المحرة"]}];
+const DESK_COMMUNES = new Set(["أدرار", "تيميمون", "عين الدفلى", "عين تموشنت", "الجزائر الوسطى", "باب الزوار", "الشراقة", "برج البحري", "بئر مراد رايس", "باب الوادي", "الدار البيضاء", "حسين داي", "الرويبة", "برج الكيفان", "بئر توتة", "زرالدة", "عنابة", "البوني", "سيدي عمار", "الحجار", "برحال", "باتنة", "تازولت", "بريكة", "عين التوتة", "مروانة", "بجاية", "أقبو", "أميزور", "القصر", "سوق الإثنين", "خراطة", "بسكرة", "أولاد جلال", "طولقة", "القنطرة", "أورلال", "بشار", "العبادلة", "بني عباس", "تاغيت", "البليدة", "بوفاريك", "العفرون", "مفتاح", "الأربعاء", "بوعرفة", "البويرة", "الأخضرية", "سور الغزلان", "عين بسام", "لاخضرية", "تمنراست", "عين صالح", "عين قزام", "تبسة", "بئر العاتر", "الشريعة", "الونزة", "تلمسان", "مغنية", "الرمشي", "الغزوات", "سبدو", "العريشة", "ندرومة", "هنين", "تيارت", "قصر الشلالة", "فرندة", "السوقر", "مهدية", "تيزي وزو", "أزفون", "ذراع بن خدة", "بوغني", "عزازقة", "تيقزيرت", "ذراع الميزان", "واضية", "الجلفة", "عين وسارة", "مسعد", "حاسي بحبح", "الادريسية", "جيجل", "الطاهير", "الميلية", "الشقفة", "سطيف", "العلمة", "عين ولمان", "عين أزال", "عين الكبيرة", "بوقاعة", "عين أرنات", "سعيدة", "يوب", "سكيكدة", "القل", "عزابة", "الحروش", "الحدائق", "سيدي بلعباس", "بن باديس", "تلاغ", "سفيزف", "قالمة", "بوشقوف", "هيليوبوليس", "وادي الزناتي", "قسنطينة", "الخروب", "حامة بوزيان", "ديدوش مراد", "زيغود يوسف", "علي منجلي", "المدية", "قصر البخاري", "البرواقية", "تابلاط", "عين بوسيف", "بني سليمان", "مستغانم", "عين تادلس", "سيدي علي", "بوقيراط", "المسيلة", "بوسعادة", "سيدي عيسى", "عين الملح", "مقرة", "معسكر", "المحمدية", "سيق", "غريس", "تيغنيف", "ورقلة", "حاسي مسعود", "تقرت", "تماسين", "الحجيرة", "وهران", "بئر الجير", "السانية", "أرزيو", "قديل", "وادي تليلات", "بطيوة", "عين الترك", "البيض", "الأبيض سيدي الشيخ", "بريزينة", "بوقطب", "إليزي", "إن أمناس", "جانت", "برج الحواس", "برج بوعريريج", "رأس الوادي", "المنصورة", "برج الغدير", "بومرداس", "بودواو", "برج منايل", "الثنية", "دلس", "خميس الخشنة", "الطارف", "القالة", "بوحجار", "البسباس", "الذرعان", "تندوف", "أم العسل", "تيسمسيلت", "ثنية الأحد", "برج بونعامة", "الوادي", "قمار", "الدبيلة", "الرباح", "جامعة", "المغير", "خنشلة", "قايس", "ششار", "أولاد رشاش", "سوق أهراس", "مداوروش", "سدراتة", "تيبازة", "شرشال", "القليعة", "حجوط", "فوكة", "بواسماعيل", "بوسماعيل", "ميلة", "فرجيوة", "شلغوم العيد", "تاجنانت", "التلاغمة", "عين الدفلة", "خميس مليانة", "العطاف", "جليدة", "مليانة", "النعامة", "المشرية", "عين الصفراء", "مغرار", "عين تيموشنت", "بني صاف", "العامرية", "حمام بوحجر", "غرداية", "بريان", "القرارة", "متليلي", "المنيعة", "حاسي الفحل", "غليزان", "وادي رهيو", "زمورة", "المطمر", "جديوية", "عمي موسى", "برج باجي مختار", "أولاد جلال", "بني عباس", "عين صالح", "عين قزام", "تقرت", "جانت", "المغير", "المنيعة", "أفلو", "بريكة", "القنطرة", "بئر العاتر", "العريشة", "قصر الشلالة", "عين وسارة", "مسعد", "قصر البخاري", "بوسعادة", "الأبيض سيدي الشيخ"]);
+const GAS = "https://script.google.com/macros/s/AKfycbwzhlX-PcpzikKxJUxI1fyq4gnZVbcNNvjZZVu0faM4hTn9lGHO1VYjdx-iuUJQ6mE/exec";
+const PRODUCT = { name: "مكواة سفر مصغرة Rodess", price: 1500, currency: "دج" };
+
+/* ===================== حماية ضد السبام =====================
+   1) توكن موقّع من السيرفر (يُستهلك مرة واحدة) يمنع الإرسال المباشر إلى نقطة الاستقبال.
+   2) حقل مخفي (honeypot) يوقف البوتات الصامتة.
+   3) وقت تعبئة الاستمارة يُرسل للسيرفر للتأكد أنه ليس إرسالًا آليًا فوريًا.
+   4) (اختياري) Cloudflare Turnstile: ضع مفتاحك العام في TURNSTILE_SITE_KEY.
+   ملاحظة: لا يوجد أي مفتاح سري في هذه الصفحة؛ كل التحقق يتم في Google Apps Script.
+   ========================================================== */
+const TURNSTILE_SITE_KEY = "";                     // اتركه فارغًا إن لم تستعمل Turnstile
+const FORM_OPENED_AT = Date.now();
+const CLIENT_ID = Math.random().toString(36).slice(2, 12) + Date.now().toString(36);
+let __tok = null, __tokAt = 0, __tokPending = null;
+
+function jsonpToken(timeoutMs) {
+  return new Promise((resolve, reject) => {
+    const cb = "__gcb" + Math.random().toString(36).slice(2, 10);
+    const s = document.createElement("script");
+    const finish = (fn, arg) => {
+      clearTimeout(timer);
+      try { delete window[cb]; } catch (_) { window[cb] = undefined; }
+      if (s.parentNode) s.parentNode.removeChild(s);
+      fn(arg);
+    };
+    const timer = setTimeout(() => finish(reject, new Error("timeout")), timeoutMs || 5000);
+    window[cb] = (data) => finish(resolve, data);
+    s.onerror = () => finish(reject, new Error("network"));
+    s.src = GAS + (GAS.indexOf("?") === -1 ? "?" : "&") + "action=token&cid=" + encodeURIComponent(CLIENT_ID) + "&callback=" + cb + "&_=" + Date.now();
+    document.head.appendChild(s);
+  });
+}
+
+function getFormToken(force) {
+  if (__tok && !force && Date.now() - __tokAt < 12 * 60 * 1000) return Promise.resolve(__tok);
+  if (__tokPending) return __tokPending;
+  __tokPending = jsonpToken(5000).then(d => {
+    if (d && d.ok && d.t && d.n && d.s) { __tok = { t: d.t, n: d.n, s: d.s, cid: CLIENT_ID }; __tokAt = Date.now(); }
+    return __tok;
+  }).catch(() => __tok).then(v => { __tokPending = null; return v; });
+  return __tokPending;
+}
+
+getFormToken();                                        // جلب التوكن عند فتح الصفحة
+setInterval(() => { getFormToken(true); }, 12 * 60 * 1000);
+
+function turnstileToken() {
+  if (!TURNSTILE_SITE_KEY || !window.turnstile) return "";
+  try { return window.turnstile.getResponse() || ""; } catch (_) { return ""; }
+}
+if (TURNSTILE_SITE_KEY) {
+  window.__tsReady = function () {
+    try { window.turnstile.render(document.getElementById("tsBox"), { sitekey: TURNSTILE_SITE_KEY, theme: "light" }); } catch (_) {}
+  };
+  const ts = document.createElement("script");
+  ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=__tsReady";
+  ts.async = true; ts.defer = true;
+  document.head.appendChild(ts);
+}
+/* =================== نهاية كود الحماية =================== */
+
+let active = 0;
+const mainImg = document.getElementById("mainImg");
+const counter = document.getElementById("counter");
+const thumbs = document.getElementById("thumbs");
+function renderGallery() {
+  const cur = IMAGES[active];
+  mainImg.src = cur.src;
+  mainImg.alt = cur.alt;
+  counter.textContent = (active+1) + " / " + IMAGES.length;
+  thumbs.innerHTML = IMAGES.map((img,i) =>
+    '<button type="button" class="'+(i===active?'on':'')+'" data-i="'+i+'"><img src="'+img.src+'" alt="'+img.alt+'"/></button>'
+  ).join("");
+}
+thumbs.addEventListener("click", e => {
+  const b = e.target.closest("button"); if (!b) return;
+  active = +b.dataset.i; renderGallery();
+});
+document.getElementById("prevBtn").onclick = () => { active = (active-1+IMAGES.length)%IMAGES.length; renderGallery(); };
+document.getElementById("nextBtn").onclick = () => { active = (active+1)%IMAGES.length; renderGallery(); };
+document.getElementById("zoomBtn").onclick = () => {
+  document.getElementById("lbImg").src = IMAGES[active].src;
+  document.getElementById("lightbox").classList.remove("hidden");
+};
+document.getElementById("lightbox").onclick = () => document.getElementById("lightbox").classList.add("hidden");
+renderGallery();
+
+const cta1 = document.getElementById("cta1");
+if (cta1) cta1.onclick = () => document.getElementById("order").scrollIntoView({behavior:"smooth", block:"start"});
+const cta2 = document.getElementById("cta2");
+if (cta2) cta2.onclick = () => document.getElementById("order").scrollIntoView({behavior:"smooth", block:"start"});
+
+document.querySelectorAll(".faq-item").forEach(item => {
+  item.querySelector(".faq-btn").onclick = () => {
+    const isOpen = item.classList.contains("open");
+    document.querySelectorAll(".faq-item.open").forEach(x => {          /* إغلاق فوري */
+      x.classList.remove("open");
+      x.querySelector(".faq-a").style.maxHeight = "0px";
+      x.querySelector(".faq-ico").textContent = "+";
+    });
+    if (!isOpen) {                                                      /* فتح فوري (تخطيط واحد) */
+      const a = item.querySelector(".faq-a");
+      item.classList.add("open");
+      a.style.maxHeight = (a.scrollHeight + 80) + "px";                 /* سقف واسع: لا يقصّ النص لو تغيّر الخط */
+      item.querySelector(".faq-ico").textContent = "−";
+    }
+  };
+});
+/* شبكة أمان: إعادة ضبط ارتفاع السؤال المفتوح لو تغيّر الخط أو مقاس الشاشة */
+const fitFaq = () => document.querySelectorAll(".faq-item.open .faq-a").forEach(a => { a.style.maxHeight = (a.scrollHeight + 80) + "px"; });
+window.addEventListener("resize", fitFaq);
+window.addEventListener("orientationchange", fitFaq);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitFaq);
+
+
+const wilayaEl = document.getElementById("wilaya");
+const communeEl = document.getElementById("commune");
+if (wilayaEl && wilayaEl.options.length <= 1) {
+  WILAYAS.forEach(w => {
+    const o = document.createElement("option");
+    o.value = w.code; o.textContent = w.code + " - " + w.name;
+    wilayaEl.appendChild(o);
+  });
+}
+
+let delivery = "";
+/* ==================== عروض الأسعار ====================
+   1) قطعة واحدة  → السعر الأصلي
+   2) قطعتان      → خصم 15%
+   3) ثلاث قطع    → خصم 15% + توصيل مجاني
+   ==================================================== */
+const OFFERS = [
+  { qty: 1, disc: 0,    free: false },
+  { qty: 2, disc: 0.15, free: false },
+  { qty: 3, disc: 0.15, free: true  }
+];
+let qty = 1;
+function offerOf(q) { return OFFERS[q - 1] || OFFERS[0]; }
+function productSub(q) { return PRODUCT.price * q; }                       // قبل الخصم
+function productNet(q) { const o = offerOf(q); return Math.round(productSub(q) * (1 - o.disc)); }  // بعد الخصم
+function shippingFor(q, w) { return offerOf(q).free ? 0 : (delivery === "desk" ? w.deskPrice : w.homePrice); }
+function totalFor(q, w) { return productNet(q) + shippingFor(q, w); }
+function selectedWilaya() { return WILAYAS.find(w => w.code === wilayaEl.value); }
+function dz(n) { return n.toLocaleString("en-US"); }
+function hasDesk(commune, wilayaName) { return commune === wilayaName || DESK_COMMUNES.has(commune); }
+
+function showErr(id, msg) {
+  const el = document.getElementById(id);
+  if (!msg) { el.classList.add("hidden"); el.textContent = ""; return; }
+  el.textContent = msg; el.classList.remove("hidden");
+}
+
+function renderDelivery() {
+  const w = selectedWilaya();
+  const commune = communeEl.value;
+  const box = document.getElementById("deliveryBox");
+  const opts = document.getElementById("deliveryOpts");
+  const warn = document.getElementById("deskWarn");
+  const totals = document.getElementById("totals");
+  if (!w || !commune) { box.classList.add("hidden"); totals.classList.add("hidden"); return; }
+  box.classList.remove("hidden");
+  const desk = hasDesk(commune, w.name);
+  warn.classList.add("hidden");   // البلديات بلا مكتب Yalidine: لا نُظهر أي تنبيه — يظهر خيار التوصيل إلى المنزل فقط
+  if (!desk && delivery === "desk") delivery = "home";
+  const options = desk
+    ? [{key:"desk", label:"التوصيل إلى المكتب", price:w.deskPrice},{key:"home", label:"التوصيل إلى المنزل", price:w.homePrice}]
+    : [{key:"home", label:"التوصيل إلى المنزل", price:w.homePrice}];
+  const freeNow = offerOf(qty).free;   // عرض بتوصيل مجاني → لا نعرض أسعار التوصيل بجانب المكتب/المنزل
+  opts.innerHTML = options.map(o =>
+    '<label class="deliv '+(delivery===o.key?'on':'')+'" style="margin-top:8px"><span style="display:flex;align-items:center;gap:12px"><input type="radio" name="delivery" value="'+o.key+'" '+(delivery===o.key?'checked':'')+' style="height:20px;width:20px;accent-color:var(--primary)"/><span style="font-size:14px;font-weight:600">'+o.label+'</span></span>'+(freeNow ? '' : '<span style="font-size:14px;font-weight:700;color:var(--primary)">'+dz(o.price)+' دج</span>')+'</label>'
+  ).join("");
+  opts.querySelectorAll("input").forEach(inp => {
+    inp.onchange = () => { delivery = inp.value; renderDelivery(); };
+  });
+
+  /* ---- بطاقات العروض (تظهر مع اختيار الولاية والبلدية) ---- */
+  const offerBox = document.getElementById("offerOpts");
+  if (offerBox) {
+    offerBox.innerHTML = OFFERS.map(o => {
+      const sub = productSub(o.qty), net = productNet(o.qty);
+      const badges = (o.disc ? '<span class="offer-badge">خصم 15%</span>' : '')
+        + (o.free ? '<span class="offer-badge">توصيل مجاني</span>' : '');
+      const note = o.disc ? '' : 'السعر الأصلي';
+      return '<label class="offer ' + (qty === o.qty ? 'on' : '') + '" style="margin-top:8px">'
+        + '<span class="offer-main"><input type="radio" name="offer" value="' + o.qty + '" ' + (qty === o.qty ? 'checked' : '') + '/>'
+        + '<span class="offer-txt"><span class="offer-name">' + o.qty + ' ' + (o.qty === 1 ? 'قطعة' : 'قطع') + '</span>'
+        + (badges ? '<span class="offer-badges">' + badges + '</span>' : '')
+        + (note ? '<span class="offer-note">' + note + '</span>' : '')
+        + '</span></span>'
+        + '<span class="offer-prices">'
+        + (o.disc ? '<span class="offer-was">' + dz(sub) + ' دج</span>' : '')
+        + '<span class="offer-now">' + dz(net) + ' دج</span>'
+        + '</span></label>';
+    }).join("");
+    offerBox.querySelectorAll("input").forEach(inp => {
+      inp.onchange = () => { qty = Number(inp.value) || 1; renderDelivery(); };
+    });
+  }
+
+  if (delivery) {
+    const o = offerOf(qty);
+    const sub = productSub(qty), net = productNet(qty), ship = shippingFor(qty, w), total = net + ship;
+    const save = sub - net;
+    totals.classList.remove("hidden");
+    /* «فاتورة» مرتبة: كل سطر = عنوان على اليمين + مبلغ واحد على اليسار */
+    totals.innerHTML =
+      '<div class="row"><span class="t-lbl">سعر المنتج'
+        + (qty > 1 ? ' <em>(' + qty + ' × ' + dz(PRODUCT.price) + ' دج)</em>' : '') + '</span>'
+        + '<span class="t-val">' + dz(sub) + ' دج</span></div>'
+      + (o.disc ? '<div class="row"><span class="t-lbl">خصم 15%</span><span class="t-val minus">− ' + dz(save) + ' دج</span></div>' : '')
+      + '<div class="row"><span class="t-lbl">التوصيل</span>'
+        + '<span class="t-val' + (o.free ? ' free' : '') + '">' + (o.free ? 'مجاني 🎉' : dz(ship) + ' دج') + '</span></div>'
+      + '<div class="hr"></div>'
+      + '<div class="row t-final"><span>السعر الإجمالي</span><span class="t-total">' + dz(total) + ' دج</span></div>';
+  } else totals.classList.add("hidden");
+}
+
+wilayaEl.onchange = () => {
+  const w = selectedWilaya();
+  communeEl.innerHTML = "";
+  delivery = "";
+  if (!w) {
+    communeEl.disabled = true;
+    communeEl.innerHTML = '<option value="">اختر الولاية أولاً</option>';
+  } else {
+    communeEl.disabled = false;
+    communeEl.innerHTML = '<option value="">اختر البلدية</option>' + w.communes.map(c => '<option value="'+c+'">'+c+'</option>').join("");
+  }
+  renderDelivery();
+};
+communeEl.onchange = () => { delivery = ""; renderDelivery(); };
+
+/* ==================== إرسال الطلب: النتيجة خلال ثانيتين كحد أقصى ====================
+   لا نُظهر رسالة النجاح بعد انتظار السيرفر فقط (كان يتأخر حتى 7 ثوانٍ)، بل:
+     • نُسخّن نقطة الاستقبال مسبقًا (ping) → رد أسرع بكثير في الحالة العادية.
+     • الطلب يُحفظ في قائمة انتظار محلية قبل عرض النجاح، ويُعاد إرساله تلقائيًا
+       حتى يصل تأكيد الاستلام → لا يُفقد الطلب إن انقطع الاتصال أو أُغلق المتصفح.
+     • نعرض النتيجة عند وصول التأكيد أو عند بلوغ 1.95 ثانية — أيّهما أسبق.
+   ================================================================================== */
+const SEND_CAP_MS = 1950;                  // أقصى انتظار قبل عرض رسالة النجاح (أقل من ثانيتين)
+const QUEUE_KEY = "rodess_pending_v1";     // قائمة الطلبات غير المؤكَّدة (محليًا)
+const __inflight = new Set();              // طلبات قيد الإرسال الآن → منع الإرسال المزدوج
+
+/* --- تسخين نقطة الاستقبال: يُقلّص زمن الإرسال من ثوانٍ إلى أجزاء من الثانية --- */
+let __warmAt = 0;
+function warmUp() {
+  const now = Date.now();
+  if (now - __warmAt < 15000) return;      // مرة كل 15 ثانية كحد أقصى
+  __warmAt = now;
+  try {
+    fetch(GAS + (GAS.indexOf("?") === -1 ? "?" : "&") + "action=ping&_=" + now,
+      { mode: "no-cors", cache: "no-store", credentials: "omit" });
+  } catch (_) {}
+}
+setTimeout(warmUp, 600);                                                    // عند فتح الصفحة
+["focusin", "change", "pointerdown"].forEach(ev =>
+  document.addEventListener(ev, (e) => {                                    // عند بدء تعبئة الاستمارة / الضغط على أزرار الطلب
+    const t = e.target;
+    if (t && t.closest && t.closest("#orderForm, .btn-cta, .mobile-cta-btn, #cta1, #cta2")) warmUp();
+  }, true));
+
+/* --- الإرسال الفعلي إلى جوجل شيت --- */
+function postOrder(payload) {
+  return fetch(GAS, {
+    method: "POST",
+    mode: "no-cors",
+    cache: "no-store",
+    credentials: "omit",
+    keepalive: true,
+    headers: { "Content-Type": "text/plain;charset=utf-8" },
+    body: JSON.stringify(payload)
+  });
+}
+
+/* --- قائمة انتظار محلية (شبكة أمان ضد انقطاع الشبكة) --- */
+function qLoad() { try { return JSON.parse(localStorage.getItem(QUEUE_KEY) || "[]"); } catch (_) { return []; } }
+function qSave(a) { try { localStorage.setItem(QUEUE_KEY, JSON.stringify(a.slice(-5))); } catch (_) {} }
+function qAdd(id, payload) {
+  const a = qLoad();
+  if (!a.some(x => x.id === id)) { a.push({ id: id, payload: payload, tries: 0, at: Date.now() }); qSave(a); }
+}
+function qDrop(id) { qSave(qLoad().filter(x => x.id !== id)); }
+
+let __flushing = false;
+async function flushQueue() {
+  if (__flushing) return;
+  const a = qLoad();
+  if (!a.length) return;
+  __flushing = true;
+  try {
+    for (const item of a) {
+      if (__inflight.has(item.id)) continue;                                        // إرساله جارٍ الآن
+      if (item.tries >= 6 || Date.now() - item.at > 15 * 60 * 1000) { qDrop(item.id); continue; }
+      try {
+        // في المحاولات التالية نُسقط التوكن (يُستهلك مرة واحدة) حتى لا يمنع وصول الطلب
+        await postOrder(item.tries ? Object.assign({}, item.payload, { tok: null }) : item.payload);
+        qDrop(item.id);
+      } catch (_) { item.tries++; qSave(a); }
+    }
+  } finally { __flushing = false; }
+}
+setTimeout(flushQueue, 2500);                                                   // عند كل فتح للصفحة
+setInterval(flushQueue, 6000);                                                  // ومحاولات دورية إن بقي شيء
+document.addEventListener("visibilitychange", () => { if (document.visibilityState === "hidden") flushQueue(); });
+window.addEventListener("online", flushQueue);
+
+let sendingLock = false;
+document.getElementById("orderForm").onsubmit = async (ev) => {
+  ev.preventDefault();
+  if (sendingLock) return;
+  const name = document.getElementById("name").value;
+  const phone = document.getElementById("phone").value;
+  const w = selectedWilaya();
+  const commune = communeEl.value;
+  const eName = name.trim().length < 3 ? "الرجاء إدخال الاسم الكامل" : "";
+  const ePhone = !/^0[567]\d{8}$/.test(phone.replace(/\s/g,"")) ? "رقم هاتف جزائري غير صحيح (مثال: 0551234567)" : "";
+  const eW = !wilayaEl.value ? "الرجاء اختيار الولاية" : "";
+  const eC = !commune ? "الرجاء اختيار البلدية" : "";
+  const eD = !delivery ? "الرجاء اختيار طريقة التوصيل" : "";
+  showErr("err-name", eName); showErr("err-phone", ePhone); showErr("err-wilaya", eW); showErr("err-commune", eC); showErr("err-delivery", eD);
+  if (eName||ePhone||eW||eC||eD) return;
+
+  sendingLock = true;
+  const btn = document.getElementById("submitBtn");
+  btn.disabled = true;
+  btn.innerHTML = '<svg class="spin" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 11-6.2-8.6"/></svg><span>جاري إرسال الطلب...</span>';
+  document.getElementById("submitError").classList.add("hidden");
+
+  const shipping = shippingFor(qty, w);
+  const total = totalFor(qty, w);
+
+  /* التوكن: إن كان جاهزًا نستعمله فورًا، وإلا لا ننتظر أكثر من 300 مللي ثانية */
+  let tok = __tok;
+  if (!tok) {
+    try { tok = (await Promise.race([getFormToken(), new Promise(r => setTimeout(r, 300))])) || __tok; }
+    catch (_) { tok = __tok; }
+  }
+
+  const orderId = CLIENT_ID + "-" + Date.now().toString(36);
+  const payload = {
+    v: 2,
+    name: name.trim(),
+    phone: phone.replace(/\s/g,""),
+    wilayaCode: w.code,
+    wilaya: w.name,
+    commune: commune,
+    delivery: delivery === "desk" ? "المكتب" : "المنزل",
+    deliveryKey: delivery,
+    productPrice: PRODUCT.price,
+    shippingPrice: shipping,
+    total: total,
+    product: PRODUCT.name,
+    qty: qty,
+    productNet: productNet(qty),
+    discount: productSub(qty) - productNet(qty),
+    freeShipping: offerOf(qty).free,
+    tok: tok || null,
+    t0: FORM_OPENED_AT,
+    t1: Date.now(),
+    ts: turnstileToken(),
+    _id: orderId
+  };
+
+  const HONEYPOT_FILLED = document.getElementById("nf_extra").value.trim() !== "";
+  const startedAt = performance.now();
+  let ack;
+  if (HONEYPOT_FILLED) {
+    ack = Promise.resolve(true);          // بوت محتمل: لا يُرسل أي شيء إلى الجدول (كما كان)
+  } else {
+    qAdd(orderId, payload);               // الطلب محفوظ محليًا قبل عرض النجاح (ضمان التسليم)
+    __inflight.add(orderId);
+    ack = postOrder(payload)
+      .then(() => { qDrop(orderId); __inflight.delete(orderId); return true; })
+      .catch(() => { __inflight.delete(orderId); return false; });
+  }
+
+  /* السباق: تأكيد السيرفر أو بلوغ المدة القصوى — أيّهما أسبق */
+  await Promise.race([
+    ack,
+    new Promise(r => setTimeout(r, Math.max(0, SEND_CAP_MS - (performance.now() - startedAt))))
+  ]);
+
+  document.getElementById("formView").classList.add("hidden");
+  const details = document.getElementById("successDetails");
+  const row = (l,v,ltr) => '<div class="detail"><span class="l">'+l+'</span><span class="v"'+(ltr?' dir="ltr"':'')+'>'+v+'</span></div>';
+  details.innerHTML = row("الاسم الكامل", name) + row("رقم الهاتف", phone, true) + row("الولاية", w.name) + row("البلدية", commune) + row("المنتج", PRODUCT.name) + row("الكمية", String(qty) + " " + (qty === 1 ? "قطعة" : "قطع") + (offerOf(qty).disc ? " (خصم 15%" + (offerOf(qty).free ? " + توصيل مجاني" : "") + ")" : "")) + row("طريقة التوصيل", delivery==="desk"?"إلى المكتب":"إلى المنزل");
+  document.getElementById("successTotal").textContent = dz(total) + " دج";
+  document.getElementById("successView").classList.remove("hidden");
+  /* ===== رسالة النجاح تظهر أعلى الصفحة تمامًا =====
+     بعد تأكيد الطلب نُمرّر الشاشة فورًا بحيث تبدأ بطاقة النجاح من أعلى النافذة،
+     فيرى الزبون «تم تأكيد طلبك بنجاح» دون أي تمرير. */
+  (function scrollSuccessToTop() {
+    var el = document.getElementById("successView");
+    if (!el) return;
+    var go = function () {
+      try { el.scrollIntoView({ behavior: "smooth", block: "start" }); }
+      catch (_) { window.scrollTo(0, el.getBoundingClientRect().top + window.pageYOffset); }
+    };
+    requestAnimationFrame(go);
+    setTimeout(go, 120);   /* ضمان بعد إعادة تخطيط الصفحة (اختفاء الاستمارة) */
+  })();
+};
+
+/* ===== ضمان عمل أزرار واتساب في كل السياقات =====
+   في متصفح عادي: يفتح الرابط في تبويب جديد مباشرة (السلوك الافتراضي للرابط).
+   إذا كانت الصفحة داخل إطار معاينة (iframe) يحجب النوافذ المنبثقة — كما في معاينات المحرّرات —
+   نُظهر تنبيهًا أنيقًا فيه الرقم مع زر «نسخ الرقم». */
+(function () {
+  var WA_NUMBER = "+213 659 798 960";
+  function toast() {
+    if (document.getElementById("waToast")) return;
+    var box = document.createElement("div");
+    box.id = "waToast";
+    box.setAttribute("role", "dialog");
+    box.innerHTML = '<div class="wa-toast-in">' +
+      '<b>لا يمكن فتح واتساب داخل هذه المعاينة</b>' +
+      '<span>المعاينات المحمية تحجب الروابط الخارجية. افتح الملف في المتصفح مباشرة، أو راسلنا على:</span>' +
+      '<span class="wa-num" dir="ltr">' + WA_NUMBER + '</span>' +
+      '<button type="button" id="waCopy">نسخ الرقم</button>' +
+      '<button type="button" class="wa-close" id="waClose" aria-label="إغلاق">✕</button>' +
+      '</div>';
+    document.body.appendChild(box);
+    document.getElementById("waClose").onclick = function () { box.remove(); };
+    document.getElementById("waCopy").onclick = function () {
+      var btn = this, txt = WA_NUMBER.replace(/\s/g, "");
+      var done = function () { btn.textContent = "✓ تم النسخ"; setTimeout(function () { btn.textContent = "نسخ الرقم"; }, 1800); };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(txt).then(done, function () { fallback(txt, done); });
+      } else fallback(txt, done);
+    };
+    function fallback(txt, done) {
+      var i = document.createElement("textarea");
+      i.value = txt; i.setAttribute("readonly", ""); i.style.position = "fixed"; i.style.opacity = "0";
+      document.body.appendChild(i); i.select();
+      try { document.execCommand("copy"); done(); } catch (_) {}
+      i.remove();
+    }
+    setTimeout(function () { if (box.parentNode) box.remove(); }, 12000);
+  }
+  var framed = false;
+  try { framed = window.self !== window.top; } catch (e) { framed = true; }
+
+  function attach() {
+    document.querySelectorAll("a[data-wa]").forEach(function (a) {
+      a.setAttribute("rel", "noopener noreferrer");
+      a.addEventListener("click", function (ev) {
+        if (!framed) return;                   // متصفح عادي: نترك الرابط يعمل بشكل طبيعي (تبويب جديد)
+        ev.preventDefault();
+        var w = null;
+        try { w = window.open(a.href, "_blank", "noopener,noreferrer"); } catch (e) { w = null; }
+        if (!w) toast();                       // المعاينة تحجب الفتح → نُظهر الرقم مع زر نسخ
+      });
+    });
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", attach);
+  else attach();
+})();
+
+// Scroll-reveal + footer year
+(function(){
+  var y = document.getElementById('year');
+  if (y) y.textContent = new Date().getFullYear();
+  if (!('IntersectionObserver' in window)) {
+    document.querySelectorAll('.reveal').forEach(function(e){ e.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+<!-- زر واتساب: الرقم +213659798960 برسالة جاهزة -->
+<a class="wa-fab" data-wa href="https://wa.me/213659798960?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%20%F0%9F%8C%B8%0A%D8%B4%D9%81%D8%AA%20%D8%B9%D8%B1%D8%B6%20%D9%85%D9%83%D9%88%D8%A7%D8%A9%20%D8%B3%D9%81%D8%B1%20Rodess%20%281%2C500%20%D8%AF%D8%AC%29%20%D9%81%D9%8A%20%D9%85%D9%88%D9%82%D8%B9%D9%83%D9%85%20%D9%88%D8%A3%D8%AD%D8%A8%20%D9%86%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%A3%D9%83%D8%AB%D8%B1." target="_blank" rel="noopener" aria-label="تواصل عبر واتساب">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.51 5.26l.36.572-1 3.648 3.737-.98zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.71.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+</a>
+
+<div class="mobile-cta">
+  <button type="button" class="mobile-cta-btn" onclick="document.getElementById('order').scrollIntoView({behavior:'smooth', block:'start'})">اطلب الآن</button>
+</div>
+
+<script>
+/* شريط «اطلب الآن» الثابت يختفي في حالتين ويعود عندما تزولان:
+     ① أثناء ظهور استمارة الطلب (كما كان).
+     ② أثناء ظهور زر «اطلب الآن» الثابت تحت السعر (#cta1) — لا نُكرّر الزر على الزبون.
+   أيّهما ظهر على الشاشة → يختفي الشريط · وإذا غاب الاثنان → يعود الشريط. */
+(function () {
+  var bar = document.querySelector(".mobile-cta");
+  if (!bar) return;
+  var form = document.getElementById("order");
+  var cta = document.getElementById("cta1");
+  var formOn = false, ctaOn = false;
+
+  function apply() { bar.classList.toggle("bar-hidden", formOn || ctaOn); }
+
+  function watch(el, set) {
+    if (!el || !("IntersectionObserver" in window)) return false;
+    new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) { set(e.isIntersecting); apply(); });
+    }, { threshold: 0 }).observe(el);
+    return true;
+  }
+
+  var ok = watch(form, function (v) { formOn = v; });
+  ok = watch(cta, function (v) { ctaOn = v; }) || ok;
+
+  if (!ok) {                        /* متصفحات بلا IntersectionObserver: بديل بالتمرير */
+    var vis = function (el) {
+      if (!el) return false;
+      var r = el.getBoundingClientRect();
+      return r.top < window.innerHeight && r.bottom > 0;
+    };
+    var upd = function () { formOn = vis(form); ctaOn = vis(cta); apply(); };
+    window.addEventListener("scroll", upd, { passive: true });
+    window.addEventListener("resize", upd);
+    upd();
+  }
+})();
+</script>
+</body>
+</body>
+</html>
