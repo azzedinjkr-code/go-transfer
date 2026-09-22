@@ -178,6 +178,7 @@ h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 
 /* Trust — luxury ivory and bronze panel */
 .trust { margin: 18px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }
 .trust .section-title { margin-bottom: 16px; }
+.trust-panel-image { display: block; width: 100%; height: auto; border-radius: 24px; box-shadow: 0 14px 28px -16px #6d351d66; }
 .trust-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; border-radius: 28px; background: linear-gradient(145deg, #fffdf8, #f8ead9); padding: 12px; border: 2px solid #fff8ed; outline: 1px solid #e8caa7; box-shadow: 0 14px 28px -16px #6d351d66, inset 0 0 0 3px #ffffff99; }
 .trust-item { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 232px; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; border-radius: 22px; background: linear-gradient(150deg, #fffefb 5%, #fff7ea 72%, #f6dfc7 100%); padding: 20px 6px 24px; text-align: center; border: 1px solid #f5dfc8; box-shadow: 0 8px 17px -11px #5e2b15aa, inset 0 1px 0 #fff; transition: transform .2s; }
 .trust-item::before { content: ""; position: absolute; z-index: -1; right: -24%; bottom: -48px; width: 150%; height: 72px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #c27840 0%, #7d3514 58%, #4f1f0b 100%); transform: rotate(-8deg); box-shadow: 0 -2px 0 #fff, 0 -5px 0 #d5a173; }
@@ -190,6 +191,7 @@ h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 
 .trust-desc { position: relative; z-index: 1; margin: 12px 0 0; color: #67554b; font-size: 13px; font-weight: 700; line-height: 1.5; }
 @media (max-width: 400px) {
   .trust { padding: 0 9px; }
+  .trust-panel-image { border-radius: 16px; }
   .trust-grid { gap: 6px; padding: 8px; border-radius: 23px; }
   .trust-item { min-height: 218px; border-radius: 18px; padding: 16px 4px 21px; }
   .icon-circle { width: 54px; height: 54px; flex-basis: 54px; }
@@ -766,20 +768,7 @@ body{
 
   <div class="trust reveal">
     <h2 class="section-title">ثقتك أولويتنا<span class="rule"></span></h2>
-    <div class="trust-grid">
-      <div class="trust-item">
-        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h17V9h6l4 6v9h-4"/><path d="M20 24H11M3 14h11M1 10h10"/><circle cx="7" cy="24" r="3"/><circle cx="23" cy="24" r="3"/><path d="M20 15h8"/></svg></span>
-        <div><p class="trust-title">توصيل سريع وآمن</p><p class="trust-desc">لجميع الولايات</p></div>
-      </div>
-      <div class="trust-item">
-        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l10 6-10 6L6 10l10-6z"/><path d="M6 10v12l10 6 10-6V10M16 16v12M2 15h5M1 20h6"/></svg></span>
-        <div><p class="trust-title">الدفع عند الاستلام</p><p class="trust-desc">ادفع بعد ما تستلم</p></div>
-      </div>
-      <div class="trust-item">
-        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 6v8c0 6-4.5 10-11 13C9.5 27 5 23 5 17V9l11-6z"/><path d="M11 16l3 3 7-7"/></svg></span>
-        <div><p class="trust-title">منتجات عالية الجودة</p><p class="trust-desc">موثوقة ومضمونة</p></div>
-      </div>
-    </div>
+    <img class="trust-panel-image" src="images/trust-panel-final.png" alt="توصيل سريع وآمن لجميع الولايات، الدفع عند الاستلام، ومنتجات عالية الجودة موثوقة ومضمونة" width="1589" height="989" loading="lazy"/>
   </div>
 
   <section class="specs reveal">
