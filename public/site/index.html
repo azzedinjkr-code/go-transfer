@@ -175,15 +175,29 @@ h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 
 .testimonials .section-title .rule { margin: 14px auto 0; }
 .section-lead { margin: 10px auto 0; max-width: 30rem; text-align: center; font-size: 14.5px; line-height: 1.8; color: var(--muted-foreground); }
 
-/* Trust */
+/* Trust — luxury ivory and bronze panel */
 .trust { margin: 18px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }
 .trust .section-title { margin-bottom: 16px; }
-.trust-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; border-radius: var(--radius); background: var(--card); padding: 18px; box-shadow: var(--shadow-card); border: 1px solid var(--border-soft); }
-.trust-item { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; border-radius: var(--radius-sm); background: linear-gradient(180deg, var(--cream) 0%, color-mix(in oklch, var(--cream) 60%, transparent) 100%); padding: 18px 10px; text-align: center; transition: transform .2s; }
+.trust-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; border-radius: 28px; background: linear-gradient(145deg, #fffdf8, #f8ead9); padding: 12px; border: 2px solid #fff8ed; outline: 1px solid #e8caa7; box-shadow: 0 14px 28px -16px #6d351d66, inset 0 0 0 3px #ffffff99; }
+.trust-item { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 222px; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; border-radius: 22px; background: linear-gradient(150deg, #fffefb 5%, #fff7ea 72%, #f6dfc7 100%); padding: 20px 6px 18px; text-align: center; border: 1px solid #f5dfc8; box-shadow: 0 8px 17px -11px #5e2b15aa, inset 0 1px 0 #fff; transition: transform .2s; }
+.trust-item::before { content: ""; position: absolute; z-index: -1; right: -24%; bottom: -33px; width: 150%; height: 72px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #c27840 0%, #7d3514 58%, #4f1f0b 100%); transform: rotate(-8deg); box-shadow: 0 -2px 0 #fff, 0 -5px 0 #d5a173; }
+.trust-item::after { content: ""; position: absolute; z-index: -1; left: -38px; top: -45px; width: 78px; height: 95px; border-radius: 0 0 70% 0; background: linear-gradient(145deg, #6f2e11, #bd7440); box-shadow: 2px 2px 0 #f5d6b4; }
 .trust-item:hover { transform: translateY(-2px); }
-.icon-circle { display: grid; height: 42px; width: 42px; place-items: center; border-radius: 999px; background: linear-gradient(135deg, var(--primary) 0%, var(--primary-deep) 100%); color: #fff; box-shadow: 0 8px 18px -8px color-mix(in oklch, var(--primary) 60%, transparent); }
-.trust-title { font-size: 13px; font-weight: 900; line-height: 1.35; margin: 0; color: var(--primary-deep); font-family: var(--font-display); }
-.trust-desc { margin: 2px 0 0; font-size: 11px; font-weight: 600; color: var(--muted-foreground); line-height: 1.4; }
+.icon-circle { display: grid; height: 62px; width: 62px; flex: 0 0 62px; place-items: center; border-radius: 999px; background: linear-gradient(150deg, #9e572b 0%, #4e1f0c 78%); color: #fff; border: 3px solid #d9a875; outline: 2px solid #fff5e8; box-shadow: 0 10px 16px -8px #663014aa, inset 0 2px 5px #d49864; }
+.icon-circle svg { width: 30px; height: 30px; stroke-width: 1.9; }
+.trust-title { min-height: 54px; display: flex; align-items: center; justify-content: center; margin: 15px 0 0; color: #762d0c; font-family: var(--font-display); font-size: 17px; font-weight: 900; line-height: 1.35; }
+.trust-title::after { content: ""; position: absolute; width: 30px; height: 3px; margin-top: 70px; border-radius: 2px; background: #944416; }
+.trust-desc { margin: 12px 0 0; color: #67554b; font-size: 13px; font-weight: 700; line-height: 1.5; }
+@media (max-width: 400px) {
+  .trust { padding: 0 9px; }
+  .trust-grid { gap: 6px; padding: 8px; border-radius: 23px; }
+  .trust-item { min-height: 208px; border-radius: 18px; padding: 16px 4px 15px; }
+  .icon-circle { width: 54px; height: 54px; flex-basis: 54px; }
+  .icon-circle svg { width: 27px; height: 27px; }
+  .trust-title { min-height: 52px; font-size: 14px; }
+  .trust-title::after { margin-top: 64px; width: 26px; }
+  .trust-desc { font-size: 11.5px; }
+}
 
 /* Features */
 .features { margin: 22px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; display: flex; flex-direction: column; gap: 12px; }
@@ -754,15 +768,15 @@ body{
     <h2 class="section-title">ثقتك أولويتنا<span class="rule"></span></h2>
     <div class="trust-grid">
       <div class="trust-item">
-        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="1" y="7" width="16" height="8" rx="1"/><path d="M5 7V5a3 3 0 016 0v2"/><path d="M1 11h16"/></svg></span>
+        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 19h17V9h6l4 6v9h-4"/><path d="M20 24H11M3 14h11M1 10h10"/><circle cx="7" cy="24" r="3"/><circle cx="23" cy="24" r="3"/><path d="M20 15h8"/></svg></span>
         <div><p class="trust-title">توصيل سريع وآمن</p><p class="trust-desc">لجميع الولايات</p></div>
       </div>
       <div class="trust-item">
-        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="6" width="14" height="10" rx="2"/><path d="M2 10h14"/></svg></span>
+        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4l10 6-10 6L6 10l10-6z"/><path d="M6 10v12l10 6 10-6V10M16 16v12M2 15h5M1 20h6"/></svg></span>
         <div><p class="trust-title">الدفع عند الاستلام</p><p class="trust-desc">ادفع بعد ما تستلم</p></div>
       </div>
       <div class="trust-item">
-        <span class="icon-circle"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3l7 4v6c0 5-3.5 7.5-7 9-3.5-1.5-7-4-7-9V7l7-4z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <span class="icon-circle"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3l11 6v8c0 6-4.5 10-11 13C9.5 27 5 23 5 17V9l11-6z"/><path d="M11 16l3 3 7-7"/></svg></span>
         <div><p class="trust-title">منتجات عالية الجودة</p><p class="trust-desc">موثوقة ومضمونة</p></div>
       </div>
     </div>
