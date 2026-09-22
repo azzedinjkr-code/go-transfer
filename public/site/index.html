@@ -179,19 +179,19 @@ h1 { margin: 16px 0 0; font-family: var(--font-display); font-size: clamp(32px, 
 .trust { margin: 18px auto 0; width: 100%; max-width: 48rem; padding: 0 18px; }
 .trust .section-title { margin-bottom: 16px; }
 .trust-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; border-radius: 28px; background: linear-gradient(145deg, #fffdf8, #f8ead9); padding: 12px; border: 2px solid #fff8ed; outline: 1px solid #e8caa7; box-shadow: 0 14px 28px -16px #6d351d66, inset 0 0 0 3px #ffffff99; }
-.trust-item { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 222px; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; border-radius: 22px; background: linear-gradient(150deg, #fffefb 5%, #fff7ea 72%, #f6dfc7 100%); padding: 20px 6px 18px; text-align: center; border: 1px solid #f5dfc8; box-shadow: 0 8px 17px -11px #5e2b15aa, inset 0 1px 0 #fff; transition: transform .2s; }
-.trust-item::before { content: ""; position: absolute; z-index: -1; right: -24%; bottom: -33px; width: 150%; height: 72px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #c27840 0%, #7d3514 58%, #4f1f0b 100%); transform: rotate(-8deg); box-shadow: 0 -2px 0 #fff, 0 -5px 0 #d5a173; }
+.trust-item { position: relative; isolation: isolate; display: flex; min-width: 0; min-height: 232px; flex-direction: column; align-items: center; justify-content: flex-start; overflow: hidden; border-radius: 22px; background: linear-gradient(150deg, #fffefb 5%, #fff7ea 72%, #f6dfc7 100%); padding: 20px 6px 24px; text-align: center; border: 1px solid #f5dfc8; box-shadow: 0 8px 17px -11px #5e2b15aa, inset 0 1px 0 #fff; transition: transform .2s; }
+.trust-item::before { content: ""; position: absolute; z-index: -1; right: -24%; bottom: -48px; width: 150%; height: 72px; border-radius: 50% 50% 0 0; background: linear-gradient(180deg, #c27840 0%, #7d3514 58%, #4f1f0b 100%); transform: rotate(-8deg); box-shadow: 0 -2px 0 #fff, 0 -5px 0 #d5a173; }
 .trust-item::after { content: ""; position: absolute; z-index: -1; left: -38px; top: -45px; width: 78px; height: 95px; border-radius: 0 0 70% 0; background: linear-gradient(145deg, #6f2e11, #bd7440); box-shadow: 2px 2px 0 #f5d6b4; }
 .trust-item:hover { transform: translateY(-2px); }
 .icon-circle { display: grid; height: 62px; width: 62px; flex: 0 0 62px; place-items: center; border-radius: 999px; background: linear-gradient(150deg, #9e572b 0%, #4e1f0c 78%); color: #fff; border: 3px solid #d9a875; outline: 2px solid #fff5e8; box-shadow: 0 10px 16px -8px #663014aa, inset 0 2px 5px #d49864; }
 .icon-circle svg { width: 30px; height: 30px; stroke-width: 1.9; }
 .trust-title { min-height: 54px; display: flex; align-items: center; justify-content: center; margin: 15px 0 0; color: #762d0c; font-family: var(--font-display); font-size: 17px; font-weight: 900; line-height: 1.35; }
 .trust-title::after { content: ""; position: absolute; width: 30px; height: 3px; margin-top: 70px; border-radius: 2px; background: #944416; }
-.trust-desc { margin: 12px 0 0; color: #67554b; font-size: 13px; font-weight: 700; line-height: 1.5; }
+.trust-desc { position: relative; z-index: 1; margin: 12px 0 0; color: #67554b; font-size: 13px; font-weight: 700; line-height: 1.5; }
 @media (max-width: 400px) {
   .trust { padding: 0 9px; }
   .trust-grid { gap: 6px; padding: 8px; border-radius: 23px; }
-  .trust-item { min-height: 208px; border-radius: 18px; padding: 16px 4px 15px; }
+  .trust-item { min-height: 218px; border-radius: 18px; padding: 16px 4px 21px; }
   .icon-circle { width: 54px; height: 54px; flex-basis: 54px; }
   .icon-circle svg { width: 27px; height: 27px; }
   .trust-title { min-height: 52px; font-size: 14px; }
